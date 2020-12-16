@@ -1,0 +1,102 @@
+
+
+
+<div class="col-md-12 divFiltro" >
+    <div class="col-md-3 divSelFiltro">
+        <div class="form-group">
+            <label for="">Usuario:</label>
+            <input class="form-control" list="browsers" name="browser" id="browser">
+            <datalist id="browsers">
+                <option value="Edge">
+                <option value="Chrome">
+            </datalist>
+        </div>
+    </div>
+    <!---->
+    <div class="col-md-2 divSelFiltro">
+        <div class="form-group">
+            <label for="">Estado:</label>
+            <select class="form-control">
+                <option>::Seleccione::</option>
+            </select>
+        </div>
+    </div>
+    <!---->
+    <div class="col-md-2 divButton">
+        <div class="divCenter">
+            <button class="btn btn-light btnMargin">Consultar</button>
+            <button class="btn btn-primary btnMargin" (click)="openModal(template)">Registrar</button>
+        </div>
+    </div>
+</div>
+
+<!---->
+<div class="col-md-12 cuerpoTable">
+    <div class="card">
+      <div class="card-body p-0">
+        <table class="table table-striped" >
+          <thead class="tableStyle">
+            <tr>
+              <th class="text-center">#</th>
+              <th class="text-center">Nombre</th>
+              <th class="text-center">Apellidos</th>
+              <th class="text-center">Usuario</th>
+              <th class="text-center">Estado</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr >
+              <th class="text-center"></th>
+              <th class="text-center"></th>
+              <th class="text-center"></th>
+              <th class="text-center"></th>
+              <th class="text-center"></th>
+              <th class="text-center">
+                <button class="btn btn-warning btn-xs btnMargin" title="Actualizar" ><i class="fas fa-pen-alt"></i></button>
+                <button title="Eliminar" class="btn btn-danger btn-xs btnMargin" ><i class="fas fa-trash-alt"></i></button>
+                <button class="btn btn-info btn-xs btnMargin" title="Activar" ><i class="fas fa-check-square"></i></button>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+
+<ng-template #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">:: Registrar Usuario ::</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="">Nombre:</label>
+                <input type="text" class="form-control" placeholder="Ingresar Nombre">
+            </div>
+            <div class="form-group">
+                <label for="">Apellido Paterno:</label>
+                <input type="text" class="form-control" placeholder="Ingresar Apellido Paterno">
+            </div>
+            <div class="form-group">
+                <label for="">Apellido Materno:</label>
+                <input type="text" class="form-control" placeholder="Ingresar Apellido Materno">
+            </div>
+            <div class="form-group">
+                <label for="">Usuario:</label>
+                <input type="text" class="form-control" placeholder="Ingresar Usuario">
+            </div>
+            <div class="form-group">
+                <label for="">Password:</label>
+                <input type="password" class="form-control" placeholder="Ingresar Password">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success btnMargin"><i class="fas fa-save"></i> Guardar</button>
+        <button class="btn btn-light btnMargin" (click)="closeRegisterUser()"><i class="fas fa-times"></i> Salir</button>
+    </div>
+  </ng-template>

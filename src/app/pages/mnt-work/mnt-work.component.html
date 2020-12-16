@@ -1,0 +1,168 @@
+
+
+<div class="col-md-12 divFiltro" >
+    <div class="col-md-2 divSelFiltro">
+        <div class="form-group">
+            <label for="">Estado:</label>
+            <select class="form-control" >
+                <option [value]="0">::Seleccione::</option>
+                <option *ngFor="let x of objEstado" [value]="x.maestroItem">{{x.nombreMaestro}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4 divButton">
+        <div class="divCenter">
+            <button *ngIf="verBotonPreview==false" class="btn btn-dark btnMargin" (click)="openPreview()" title="ver preview"><i class="fas fa-eye"></i></button>
+            <button *ngIf="verBotonPreview==true" class="btn btn-dark btnMargin" (click)="closePreview()" title="cerrar preview"><i class="fas fa-eye-slash"></i></button>
+            <button  class="btn btn-light btnMargin" (click)="listarWork()">Consultar</button>
+            <button  class="btn btn-primary btnMargin" (click)="openModal(work)">Registrar</button>
+        </div>  
+    </div>
+</div>
+
+<div class="col-md-12 cuerpoTable">
+        <table class="table table-striped" >
+          <thead class="tableStyle">
+            <tr>
+              <th class="text-center">#</th>
+              <th class="text-center">Nombre</th>
+              <th class="text-center">Estudio</th>
+              <th class="text-center">Fecha Inicio</th>
+              <th class="text-center">Fecha Fin</th>
+              <th class="text-center">Imagen</th>
+              <th class="text-center">Estado</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let x of ObjWork">
+              <th class="text-center">{{x.idwork}}</th>
+              <th class="text-center">{{x.nombre}}</th>
+              <th class="text-center">{{x.estudio}}</th>
+              <th class="text-center">{{x.fechaInicio | date: 'dd/MM/yyyy'}}</th>
+              <th class="text-center">{{x.fechaFin | date: 'dd/MM/yyyy'}}</th>
+              <th class="text-center"><img src="{{x.imagen}}" style="width: 50px;
+                height: 50px;
+                border: 2px solid #141E30;
+                margin: 0 auto;
+                border-radius: 50%;"></th>
+              <th class="text-center">{{x.estado==1?'Activo':'Eliminado'}}</th>
+              <th class="text-center">
+                <button *ngIf="x.estado==1" class="btn btn-warning btn-xs btnMargin" title="Actualizar" (click)="actualizarModal(x,work)"><i class="fas fa-pen-alt"></i></button>
+                <button *ngIf="x.estado==1" title="Eliminar" class="btn btn-danger btn-xs btnMargin" (click)="openModalEliminacion(x,eliminar)"><i class="fas fa-trash-alt"></i></button>
+                <button *ngIf="x.estado==2" class="btn btn-info btn-xs btnMargin" title="Activar" (click)="openModalActivar(x,activar)"><i class="fas fa-check-square"></i></button>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+</div>
+
+<div class="col-md-12 preview" *ngIf="verPreview">  
+  <div class="work">
+    <section><h1><u>Work</u></h1></section>
+    <div>
+       <div>
+        <div class="headerWork">
+            <p>Forma parte de mí <b>timeline</b> y de mi crecimiento Profesional. </p><a href="">Contacto</a>
+        </div>
+        <div class="contenedorWork">
+          <section class="timeline">
+            <ol>
+              <li *ngFor="let x of objWorkCliente">
+                <div>
+                    <section>
+                        <img src="{{x.imagen}}">
+                    </section> 
+                  <p><b>{{x.nombre}}</b></p>
+                  <p>{{x.estudio}}</p>
+                  <span><b>{{x.fechaInicio | date:'dd/MM/yyyy'}} - {{x.fechaFin | date:'dd/MM/yyyy'}}</b></span>
+                </div>
+              </li>
+              <li></li>
+            </ol>
+          </section>
+        </div>
+       </div>
+    </div>
+</div>
+</div>
+    
+<ng-template #work>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{tittleModal}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <div class="col-md-12">
+          <div class="form-group">
+              <label for="">Nombre:</label>
+              <input type="text" [(ngModel)]="mntWork.nombre" class="form-control" placeholder="Ingresar Nombre">
+          </div>
+          <div class="form-group">
+              <label for="">Estudio:</label>
+              <input type="text" [(ngModel)]="mntWork.estudio" class="form-control" placeholder="Ingresar Estudio">
+          </div>
+          <div class="col-md-12" style="overflow: hidden;padding: 0px;">
+            <div class="col-md-6" style="float: left;padding: 0px 10px 0px 0px;">      
+                <div class="form-group">
+                    <label for="">Fecha inicio:</label>
+                    <input type="date" [(ngModel)]="mntWork.fechaInicio" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-6"  style="float: left;padding: 0px 10px 0px 0px;">
+                <div class="form-group">
+                    <label for="">Fecha Fin:</label>
+                    <input type="date" [(ngModel)]="mntWork.fechaFin" class="form-control">
+                </div>
+            </div>
+          </div>
+          <div class="card-body nullPadding">
+            <ngx-dropzone (change)="onSelect($event)">
+              <ngx-dropzone-label>¡Arrastrar imagen!</ngx-dropzone-label>
+              <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let f of files" [file]="f" [removable]="true" (removed)="onRemove(f)">
+                <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+              </ngx-dropzone-image-preview>
+            </ngx-dropzone>
+          </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+      <button *ngIf="verBotonRegistrar==true" class="btn btn-success btnMargin" (click)="registrar()"><i class="fas fa-save"></i> Guardar</button>
+      <button class="btn btn-light btnMargin" (click)="closeModal()"><i class="fas fa-times"></i> Salir</button>
+  </div>
+</ng-template>
+
+
+<ng-template #eliminar>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">:: Eliminar ::</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <p>¿Esta seguro de Eliminar el siguiente dato: {{nombreDato}}?</p>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary btnMargin" (click)="eliminarWork()"><i class="fas fa-trash-alt"></i> Aceptar</button>
+      <button class="btn btn-light btnMargin" (click)="closeModal()"><i class="fas fa-times"></i> Salir</button>
+  </div>
+</ng-template>
+
+<ng-template #activar>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">:: Activar ::</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <p>¿Esta seguro de activar el siguiente dato: {{nombreDato}}?</p>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary btnMargin" (click)="activarWork()"><i class="fas fa-trash-alt"></i> Aceptar</button>
+      <button class="btn btn-light btnMargin" (click)="closeModal()"><i class="fas fa-times"></i> Salir</button>
+  </div>
+</ng-template>

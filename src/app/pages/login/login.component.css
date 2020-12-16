@@ -1,0 +1,78 @@
+
+.contenedor{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+}
+.login{
+    width: 60%;
+    height: 80%;
+    margin: auto auto;
+    border: 1px solid red;
+    border-radius: 30px;
+}
+.login section{
+    width: 50%;
+    height: 100%;
+    float: left;
+    border: 1px solid blue;
+}
+.presentacion{
+    padding:20px;
+    position: relative;
+    display: flex;
+    background: #232526;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #414345, #232526); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.presentacion div{
+    border: 1px solid tomato;
+    margin: auto auto;
+}
+.presentacion h1{
+    border: 1px solid red;
+    text-align: center;
+    color: white;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: bold;
+}
+.presentacion p{
+    color: white;
+    border: 1px solid black;
+    text-align: right;
+    font-family: 'Titillium Web', sans-serif;
+}
+.presentacion span{
+    color: white;
+    bottom: 20px;
+    right: 20px;
+    text-align: right;
+    border: 1px solid black;
+    position: absolute;
+    font-family: 'Titillium Web', sans-serif;
+}
+.accesoLogin{
+    padding:20px;
+    position: relative;
+    display: flex;
+}
+.accesoLogin>div{
+    width: 70%;
+    height: 70%;
+    margin: auto auto;
+}
+.accesoLogin>div>p{
+    font-family: 'Titillium Web', sans-serif;
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+}
+.btnIngresar{
+    display: block;
+    background:tomato;
+    width: 100%;
+    border: 0;
+    padding: 5px 0px;
+    font-family: 'Titillium Web', sans-serif;
+}

@@ -1,0 +1,141 @@
+<div class="col-md-12 divFiltro" >
+  <!---->
+  <div class="col-md-2 divSelFiltro">
+      <div class="form-group">
+          <label for="">Tabla:</label>
+          <select class="form-control" [(ngModel)]="selTabla.idMaestro" (change)="selecTabla()">
+              <option [value]="0">::Seleccione::</option>
+              <option *ngFor="let x of tablaMaestro" [value]="x.idMaestro">{{x.nombreMaestro}}</option>
+          </select>
+      </div>
+  </div>
+  <div class="col-md-4 divButton">
+      <div class="divCenter">
+          <button class="btn btn-light btnMargin" (click)="listarItemMaestro()">Consultar</button>
+          <button class="btn btn-primary btnMargin" *ngIf="!verRegistrar" (click)="modalRegistrar(tabla)">Registrar</button>
+          <button class="btn btn-primary btnMargin" *ngIf="verRegistrar" (click)="modalRegistrar(maestro)">Registrar</button>
+      </div>
+  </div>
+</div>
+
+<div class="col-md-12 cuerpoTable">
+    <div class="card">
+      <div class="card-body p-0">
+        <table class="table table-striped" >
+          <thead class="tableStyle">
+            <tr>
+              <th class="text-center">#</th>
+              <th class="text-center">Nombre</th>
+              <th class="text-center">Descripción</th>
+              <th class="text-center">Item</th>
+              <th class="text-center">Estado</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let x of itemMaestro">
+              <th class="text-center">{{x.idMaestro}}</th>
+              <th class="text-center">{{x.nombreMaestro}}</th>
+              <th class="text-center">{{x.desMaestro}}</th>
+              <th class="text-center">{{x.maestroItem}}</th>
+              <th class="text-center">{{x.estado==1? 'Activo':'Eliminado'}}</th>
+              <th class="text-center">
+                <button *ngIf="verificarBotonTabla==true && x.estado==1" class="btn btn-warning btn-xs btnMargin" title="Actualizar" (click)="actualizarItemModal(x,tabla)"><i class="fas fa-pen-alt"></i></button>
+                <button *ngIf="verificarBotonTabla==false && x.estado==1" class="btn btn-warning btn-xs btnMargin" title="Actualizar" (click)="actualizarItemModal(x,maestro)"><i class="fas fa-pen-alt"></i></button>
+                <button *ngIf="x.estado==1" title="Eliminar" class="btn btn-danger btn-xs btnMargin" (click)="openModalEliminacion(x,eliminar)"><i class="fas fa-trash-alt"></i></button>
+                <button *ngIf="x.estado==2" class="btn btn-info btn-xs btnMargin" title="Activar" (click)="openModalActivar(x,activar)"><i class="fas fa-check-square"></i></button>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+
+
+
+
+<ng-template #tabla>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{tittleTabla}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <div class="col-md-12">
+          <div class="form-group">
+              <label for="">Nombre:</label>
+              <input type="text" [(ngModel)]="mntMaestro.nombreMaestro" class="form-control" placeholder="Ingresar Nombre Tabla">
+          </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+      <button *ngIf="botonTablaMaestro==true" class="btn btn-success btnMargin" (click)="registrarTablaMaestro()"><i class="fas fa-save"></i> Guardar</button>
+      <button *ngIf="botonTablaMaestro==false" class="btn btn-success btnMargin" (click)="actualizarTablaMaestro()"><i class="fas fa-save"></i> Actualizar</button>
+      <button class="btn btn-light btnMargin" (click)="closeModal()"><i class="fas fa-times"></i> Salir</button>
+  </div>
+</ng-template>
+
+
+<ng-template #maestro>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{tittleItem}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <div class="col-md-12">
+          <div class="form-group">
+              <label for="">Nombre:</label>
+              <input type="text" [(ngModel)]="mntMaestro.nombreMaestro" class="form-control" placeholder="Ingresar Nombre">
+          </div>
+          <div class="form-group">
+              <label for="">Descripción:</label>
+              <input type="text" [(ngModel)]="mntMaestro.desMaestro" class="form-control" placeholder="Ingresar Ruta">
+          </div>
+          <div class="form-group">
+            <label for="">Item:</label>
+            <input type="text" [(ngModel)]="mntMaestro.maestroItem" class="form-control" placeholder="Ingresar Ruta">
+        </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+      <button *ngIf="botonItemMaestro==true" class="btn btn-success btnMargin" (click)="registrarItemMaestro()"><i class="fas fa-save"></i> Guardar</button>
+      <button *ngIf="botonItemMaestro==false" class="btn btn-success btnMargin" (click)="actualizarItem()"><i class="fas fa-save"></i> Actualizar</button>
+      <button class="btn btn-light btnMargin" (click)="closeModal()"><i class="fas fa-times"></i> Salir</button>
+  </div>
+</ng-template>
+
+<ng-template #eliminar>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">:: Eliminar ::</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <p>¿Esta seguro de Eliminar el siguiente dato: {{nombreDato}}?</p>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary btnMargin" (click)="eliminarMaestro()"><i class="fas fa-trash-alt"></i> Aceptar</button>
+      <button class="btn btn-light btnMargin" (click)="closeModal()"><i class="fas fa-times"></i> Salir</button>
+  </div>
+</ng-template>
+
+<ng-template #activar>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">:: Activar ::</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <p>¿Esta seguro de activar el siguiente dato: {{nombreDato}}?</p>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary btnMargin" (click)="activarMaestro()"><i class="fas fa-trash-alt"></i> Aceptar</button>
+      <button class="btn btn-light btnMargin" (click)="closeModal()"><i class="fas fa-times"></i> Salir</button>
+  </div>
+</ng-template>
