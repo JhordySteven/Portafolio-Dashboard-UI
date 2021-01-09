@@ -16,7 +16,7 @@ export class MntSkillComponent implements OnInit {
   ngOnInit(): void {
     this.listarSkill();
     this.listarTipoSkill();
-    //this.listarEstado();
+    this.listarEstado();
   }
   objEstado:any;
   objTipoSkill:any;
@@ -42,7 +42,6 @@ export class MntSkillComponent implements OnInit {
     let idMaestro=2;
     this.fapi.fapiGetParameter('listMaestro',opcion+'/'+idMaestro).subscribe(x=>{
       this.objEstado=x[0];
-      console.log(this.objEstado);
     })
   }
   listarTipoSkill(){
@@ -74,18 +73,19 @@ export class MntSkillComponent implements OnInit {
     this.mntSkill.opcion=1;
     this.fapi.fapiPost('addSkill',this.mntSkill).subscribe(x=>{
       if(x=='ok'){
-        this.toast.success('¡AVISO!','Se registro correctamente.');
+        this.toast.success('Se registro correctamente.','¡AVISO!');
         this.closeModal();
         this.listarSkill();
       }else{
-        this.toast.warning('¡AVISO!','Algo no salio bien.');
+        this.toast.warning('Algo no salio bien.','¡AVISO!');
       }
     })
   }
   objSkill:any;
   listarSkill(){
     this.mntSkill.opcion=5;
-    this.fapi.fapiGetParameter('listarSkill',this.mntSkill.opcion).subscribe(x=>{
+    console.log('estado',this.mntSkill.estado);
+    this.fapi.fapiGetParameter('listarSkill',this.mntSkill.opcion+'/'+this.mntSkill.estado).subscribe(x=>{
       this.objSkill=x[0];
       console.log(this.objSkill);
     })
@@ -107,11 +107,11 @@ export class MntSkillComponent implements OnInit {
     this.mntSkill.opcion=2;
     this.fapi.fapiPut('updateSkill',this.mntSkill).subscribe(x=>{
       if(x='ok'){
-        this.toast.success('¡AVISO!','Se registro correctamente.');
+        this.toast.success('Se registro correctamente.','¡AVISO!');
         this.closeModal();
         this.listarSkill();
       }else{
-        this.toast.warning('¡AVISO!','Algo no salio bien.');
+        this.toast.warning('Algo no salio bien.','¡AVISO!');
       }
     })
   }
@@ -133,11 +133,11 @@ export class MntSkillComponent implements OnInit {
     this.mntSkill.opcion=3;
     this.fapi.fapiPut('removeSkill',this.mntSkill).subscribe(x=>{
       if(x='ok'){
-        this.toast.success('¡AVISO!','Se elimino correctamente.');
+        this.toast.success('Se elimino correctamente.','¡AVISO!');
         this.closeModal();
         this.listarSkill();
       }else{
-        this.toast.warning('¡AVISO!','Algo no salio bien.');
+        this.toast.warning('Algo no salio bien.','¡AVISO!');
       }
     })
   }
@@ -146,11 +146,11 @@ export class MntSkillComponent implements OnInit {
     this.mntSkill.opcion=4;
     this.fapi.fapiPut('activateSkill',this.mntSkill).subscribe(x=>{
       if(x='ok'){
-        this.toast.success('¡AVISO!','Se activo correctamente.');
+        this.toast.success('Se activo correctamente.','¡AVISO!');
         this.closeModal();
         this.listarSkill();
       }else{
-        this.toast.warning('¡AVISO!','Algo no salio bien.');
+        this.toast.warning('Algo no salio bien.','¡AVISO!');
       }
     })
   }

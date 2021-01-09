@@ -1,10 +1,8 @@
-
-
 <div class="col-md-12 divFiltro" >
     <div class="col-md-2 divSelFiltro">
         <div class="form-group">
             <label for="">Estado:</label>
-            <select class="form-control" >
+            <select class="form-control" [(ngModel)]="mntSkill.estado">
                 <option [value]="0">::Seleccione::</option>
                 <option *ngFor="let x of objEstado" [value]="x.maestroItem">{{x.nombreMaestro}}</option>
             </select>
@@ -14,7 +12,7 @@
         <div class="divCenter">
             <button *ngIf="verBotonPreview==false" class="btn btn-dark btnMargin" (click)="openPreview()" title="ver preview"><i class="fas fa-eye"></i></button>
             <button *ngIf="verBotonPreview==true" class="btn btn-dark btnMargin" (click)="closePreview()" title="cerrar preview"><i class="fas fa-eye-slash"></i></button>
-            <button [disabled]="verBotonPreview==true" class="btn btn-light btnMargin">Consultar</button>
+            <button [disabled]="verBotonPreview==true" class="btn btn-light btnMargin" (click)="listarSkill()">Consultar</button>
             <button [disabled]="verBotonPreview==true" class="btn btn-primary btnMargin" (click)="openModal(skill)">Registrar</button>
         </div>  
     </div>
@@ -34,7 +32,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let x of objSkill">
+            <tr *ngFor="let x of objSkill | paginate: { id: 'foo',
+            itemsPerPage: 5,
+            currentPage: p,
+            totalItems: total }">
               <th class="text-center">{{x.idskill}}</th>
               <th class="text-center">{{x.nombre}}</th>
               <th class="text-center">{{x.imgSkill}}
@@ -51,6 +52,7 @@
             </tr>
           </tbody>
         </table>
+        <pagination-controls id="foo" (pageChange)="p = $event"></pagination-controls>
 </div>
 <div class="col-md-12 preview" *ngIf="verPreview">  
   <div class="skill">
@@ -161,7 +163,7 @@
     </button>
   </div>
   <div class="modal-body">
-      <p>¿Esta seguro de Eliminar el siguiente dato: {{nombreDato}}?</p>
+      <p>¿Esta seguro de Eliminar el siguiente dato: <b>{{nombreDato}}</b>?</p>
   </div>
   <div class="modal-footer">
       <button class="btn btn-primary btnMargin" (click)="eliminarSkill()"><i class="fas fa-trash-alt"></i> Aceptar</button>
@@ -177,7 +179,7 @@
     </button>
   </div>
   <div class="modal-body">
-      <p>¿Esta seguro de activar el siguiente dato: {{nombreDato}}?</p>
+      <p>¿Esta seguro de activar el siguiente dato: <b>{{nombreDato}}</b>?</p>
   </div>
   <div class="modal-footer">
       <button class="btn btn-primary btnMargin" (click)="activarSkill()"><i class="fas fa-trash-alt"></i> Aceptar</button>

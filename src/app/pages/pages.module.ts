@@ -18,7 +18,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import { MntAboutComponent } from './mnt-about/mnt-about.component';
 import { MntJobsComponent } from './mnt-jobs/mnt-jobs.component';
 import { MntPrincipalComponent } from './mnt-principal/mnt-principal.component';
-
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 
 @NgModule({
@@ -30,7 +30,8 @@ import { MntPrincipalComponent } from './mnt-principal/mnt-principal.component';
     FormsModule,
     BrowserAnimationsModule, 
     ToastrModule.forRoot(),
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    NgxPaginationModule
   ],exports:[
     ClienteComponent, LoginComponent, DashboardComponent, GestionMenuComponent, GestionMaestroComponent, GestionSeguridadComponent, GestionUsuarioComponent, MntSkillComponent, MntWorkComponent, MntAboutComponent, MntJobsComponent, MntPrincipalComponent
   ]

@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {PagesModule} from './pages/pages.module';
 import { HttpClientModule } from '@angular/common/http';
 import {DatePipe} from '@angular/common';
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {DatePipe} from '@angular/common';
     PagesModule,
     ComponentModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
