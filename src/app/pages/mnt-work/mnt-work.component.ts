@@ -1,4 +1,3 @@
-
 import { Component, OnInit,TemplateRef } from '@angular/core';
 import { BsModalService,BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
@@ -17,6 +16,8 @@ export class MntWorkComponent implements OnInit {
   constructor(private fapi:FapiRestService,private modalService: BsModalService,private toast:ToastrService,private datePipe: DatePipe) { }
 
   ngOnInit(): void {
+    this.listarWork();
+    this.listarEstado();
   }
   objEstado:any;
   ObjWork:any;
@@ -44,7 +45,6 @@ export class MntWorkComponent implements OnInit {
     let idMaestro=2;
     this.fapi.fapiGetParameter('listMaestro',opcion+'/'+idMaestro).subscribe(x=>{
       this.objEstado=x[0];
-      console.log(this.objEstado);
     })
   }
   openModal(template: TemplateRef<any>){
@@ -66,27 +66,20 @@ export class MntWorkComponent implements OnInit {
     this.mntWork.fechaFin=this.datePipe.transform(item.fechaFin,"yyyy-MM-dd");
     this.mntWork.imagen=item.imagen;
     this.mntWork.estado=item.estado;
-    console.log(this.mntWork);
   }
   files: File[] = [];
  
   onSelect(event) {
-    debugger
-    console.log(event);
     if(this.files.length<1){
     this.files.push(...event.addedFiles);
-    console.log(this.files);
-    console.log(this.files[0].name);
     }
   }
   
   onRemove(event) {
-    console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
   }
 
   subirImagen(){
-    debugger
     const formData=new FormData();
     formData.append('archivo',this.files[0]);
     this.fapi.fapiPost('subirFoto',formData) .subscribe(x=>{
@@ -99,18 +92,17 @@ export class MntWorkComponent implements OnInit {
     this.mntWork.imagen=this.files[0].name;
     this.fapi.fapiPost('addWork',this.mntWork).subscribe(x=>{
       if(x=='ok'){
-        this.toast.success('AVISO','Se registro correctamente.');
+        this.toast.success('Se registro correctamente.','AVISO');
         this.subirImagen();
+        this.listarWork();
       }
     })
   }
 
   listarWork(){
     this.mntWork.opcion=2;
-    this.mntWork.estado=1;
     this.fapi.fapiGetParameter('listWork',this.mntWork.opcion+'/'+this.mntWork.estado).subscribe(x=>{
         this.ObjWork=x[0];
-        console.log(this.ObjWork);
         for (let i = 0; i < this.ObjWork.length; i++) {
           this.ObjWork[i].imagen=RutaImg+this.ObjWork[i].imagen;
         }
@@ -122,7 +114,6 @@ export class MntWorkComponent implements OnInit {
       this.mntWork.estado=1;
       this.fapi.fapiGetParameter('listWork',this.mntWork.opcion+'/'+this.mntWork.estado).subscribe(x=>{
           this.objWorkCliente=x[0];
-          console.log(this.objWorkCliente);
           for (let i = 0; i < this.objWorkCliente.length; i++) {
             this.objWorkCliente[i].imagen=RutaImg+this.objWorkCliente[i].imagen;
           }
@@ -151,8 +142,9 @@ export class MntWorkComponent implements OnInit {
       if(x=='ok'){
         this.toast.success('Se elimino correctamente.','!AVISO¡');
         this.modalService.hide();
+        this.listarWork();
       }else{
-        this.toast.error('!AVISO¡','Algo salio mal.');
+        this.toast.error('Algo salio mal.','!AVISO¡');
       }
     })
   }
@@ -174,8 +166,23 @@ export class MntWorkComponent implements OnInit {
       if(x=='ok'){
         this.toast.success('Se activo correctamente.','!AVISO¡');
         this.modalService.hide();
+        this.listarWork();
       }else{
-        this.toast.error('!AVISO¡','Algo salio mal.');
+        this.toast.error('Algo salio mal.','!AVISO¡');
+      }
+    })
+  }
+  actualizarWork(){
+    this.mntWork.imagen=this.files[0].name;
+    this.mntWork.opcion=5;
+    this.fapi.fapiPut('updateWork',this.mntWork).subscribe(response=>{
+      if(response=='ok'){
+        this.toast.success('Se actualizo correctamente.','!AVISO¡');
+        this.modalService.hide();
+        this.subirImagen();
+        this.listarWork();
+      }else{
+        this.toast.error('Algo salio mal.','!AVISO¡');
       }
     })
   }
