@@ -9,6 +9,9 @@ import { GestionUsuarioComponent } from './pages/gestion-usuario/gestion-usuario
 import { LoginComponent } from './pages/login/login.component';
 import { MntSkillComponent } from './pages/mnt-skill/mnt-skill.component';
 import { MntWorkComponent } from './pages/mnt-work/mnt-work.component';
+import { MntAboutComponent } from './pages/mnt-about/mnt-about.component';
+import { MntJobsComponent } from './pages/mnt-jobs/mnt-jobs.component';
+import { MntPrincipalComponent } from './pages/mnt-principal/mnt-principal.component';
 
 const routes: Routes = [
   //{ path: '', component: ClienteComponent },
@@ -18,7 +21,10 @@ const routes: Routes = [
   {path:'gestUsuario',component:GestionUsuarioComponent},
   {path:'gestMenu',component:GestionMenuComponent},
   {path:'gestSkill',component:MntSkillComponent},
-  {path:'gestWork',component:MntWorkComponent}
+  {path:'gestWork',component:MntWorkComponent},
+  {path:'gestAbout',component:MntAboutComponent},
+  {path:'gestJobs',component:MntJobsComponent},
+  {path:'gestPrincipal',component:MntPrincipalComponent}
 ];
 
 @NgModule({

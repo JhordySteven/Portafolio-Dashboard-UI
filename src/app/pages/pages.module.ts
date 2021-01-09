@@ -15,11 +15,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { MntSkillComponent } from './mnt-skill/mnt-skill.component';
 import { MntWorkComponent } from './mnt-work/mnt-work.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { MntAboutComponent } from './mnt-about/mnt-about.component';
+import { MntJobsComponent } from './mnt-jobs/mnt-jobs.component';
+import { MntPrincipalComponent } from './mnt-principal/mnt-principal.component';
 
 
 
 @NgModule({
-  declarations: [ClienteComponent, LoginComponent, DashboardComponent, GestionMenuComponent, GestionMaestroComponent, GestionSeguridadComponent, GestionUsuarioComponent, MntSkillComponent, MntWorkComponent],
+  declarations: [ClienteComponent, LoginComponent, DashboardComponent, GestionMenuComponent, GestionMaestroComponent, GestionSeguridadComponent, GestionUsuarioComponent, MntSkillComponent, MntWorkComponent, MntAboutComponent, MntJobsComponent, MntPrincipalComponent],
   imports: [
     CommonModule,
     ComponentModule,
@@ -29,7 +32,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     ToastrModule.forRoot(),
     NgxDropzoneModule
   ],exports:[
-    ClienteComponent, LoginComponent, DashboardComponent
+    ClienteComponent, LoginComponent, DashboardComponent, GestionMenuComponent, GestionMaestroComponent, GestionSeguridadComponent, GestionUsuarioComponent, MntSkillComponent, MntWorkComponent, MntAboutComponent, MntJobsComponent, MntPrincipalComponent
   ]
 })
 export class PagesModule { }
