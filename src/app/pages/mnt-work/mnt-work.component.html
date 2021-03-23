@@ -33,10 +33,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let x of ObjWork | paginate: { id: 'foo',
+            <tr *ngFor="let x of ObjWork| paginate: { 
             itemsPerPage: 5,
-            currentPage: p,
-            totalItems: total }">
+            currentPage: p}">
               <th class="text-center">{{x.idwork}}</th>
               <th class="text-center">{{x.nombre}}</th>
               <th class="text-center">{{x.estudio}}</th>
@@ -56,7 +55,7 @@
             </tr>
           </tbody>
         </table>
-        <pagination-controls id="foo" (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls (pageChange)="p= $event"></pagination-controls>
 </div>
 
 <div class="col-md-12 preview" *ngIf="verPreview">  

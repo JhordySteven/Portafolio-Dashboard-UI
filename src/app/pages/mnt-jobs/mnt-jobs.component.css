@@ -1,0 +1,44 @@
+.divFiltro{
+    overflow: hidden;
+    background:#E5E8E8;
+    border-radius: 10px;
+}
+.divSelFiltro{
+    float: left;
+}
+.divButton{
+    float: right;
+    height:86px;
+    display: flex;
+    overflow: hidden;
+}
+.divCenter{
+    margin: auto auto;
+    overflow: hidden;
+}
+.btnMargin{
+    margin-right: 5px;
+}
+.cuerpoTable{
+    overflow: hidden;
+    float: left;
+    padding: 20px;
+}
+
+.modal-header{
+    background: #1864ab;
+    color: white;
+}
+.close{
+    color:white;
+}
+.tableStyle{
+    background: #1864ab;
+    color: white;
+}
+.preview{
+    padding: 20px 0px;
+}
+.nullPadding{
+    padding: 0px;
+}

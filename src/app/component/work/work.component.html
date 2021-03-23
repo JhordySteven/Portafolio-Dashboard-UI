@@ -1,31 +1,19 @@
 <div class="work">
-    <section><h1><u>Work</u></h1></section>
+    <h1><u>Timeline</u></h1>
     <div>
        <div>
-        <div class="headerWork">
-            <p>Forma parte de mí <b>timeline</b> y de mi crecimiento Profesional. </p><a href="">Contacto</a>
-        </div>
+        <p>Forma parte de mí <b>timeline</b> y de mi crecimiento Profesional. </p><a href="">Contacto</a>
         <div class="contenedorWork">
           <section class="timeline">
             <ol>
-              <li>
+              <li *ngFor="let x of ObjWork">
                 <div>
                     <section>
-                        <img src="../../../assets/cibertec.png">
+                        <img src="{{x.imagen}}">
                     </section> 
-                  <p><b>Cibertec</b></p>
-                  <p>Computación e Informática</p>
-                  <span><b>12/03/2017 - 30/12/2019</b></span>
-                </div>
-              </li>
-              <li>
-                <div>
-                  <section>
-                    <img src="../../../assets/ses.png">
-                  </section>
-                  <p><b>Software Enterprice Service</b></p>
-                  <p>Ingeniero de Software</p>
-                  <span><b>05/10/2019 - actualidad</b></span>
+                  <p><b>{{x.nombre}}</b></p>
+                  <p>{{x.estudio}}</p>
+                  <span><b>{{x.fechaInicio| date: 'dd/MM/yyyy'}} - {{x.fechaFin   == NULL ? 'Actualmente' : x.fechaFin | date: 'dd/MM/yyyy' }}</b></span>
                 </div>
               </li>
               <li></li>

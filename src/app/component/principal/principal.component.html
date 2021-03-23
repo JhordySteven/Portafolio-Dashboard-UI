@@ -1,28 +1,19 @@
 
 <div class="contenedor">
-    <div class="sectionIzquierda">
-        <section>
-            <h1>Jhordy <br>Vargas</h1>
-            <p>Desarrollador Web | Mobile</p>
-            <ul>
-                <li style="background: #1C2833;color: white;">
-                    <a href="https://github.com/JhordySteven" title="Github" target="_blank"><i class="fab fa-github"></i></a>
-                </li>
-                <li style="background: #005DAF;color: white;">
-                    <a href="https://www.linkedin.com/in/jhordy-steven-vargas-ccora-923573185/" title="Linkedin" target="_blank"><i class="fab fa-linkedin"></i></a>
-                </li>
-                <li style="background: #8a2387; /* fallback for old browsers */
-                background: -webkit-linear-gradient(to right, #8a2387, #e94057, #f27121); /* Chrome 10-25, Safari 5.1-6 */
-                background: linear-gradient(to right, #8a2387, #e94057, #f27121); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;color: white;">
-                    <a href="https://www.instagram.com/jhordy.steven/?hl=es-la" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-                </li>
-                <li style="background: #3b5998;color: white;">
-                    <a href="https://www.facebook.com/vargas.jhordy/" title="Facebook" target="_blank"><i class="fab fa-facebook-square"></i></a>
-                </li>
-            </ul>
-        </section>
-    </div>
-    <div class="sectionDerecha">
-        <img src="../../../assets/marketing-gif-2-1.gif">
+    <div>
+        <div class="sectionIzquierda">
+            <section *ngFor="let x of arrayPrincipal">
+                <h1>{{x.nombre}}</h1>
+                <p>{{x.descripcion}}👨‍💻</p>
+                <ul>
+                    <a *ngFor="let z of arrayRedes" [ngStyle]="{'background':z.style}"  [ngClass]="z.clases" href="{{z.ruta}}" title="{{z.titulo}}" target="_blank"></a>
+                    <button style="background: #B03A2E;" title="Curriculum Vitae" class="fas fa-file-pdf" id="cv"></button>
+                </ul>
+            </section>
+        </div>
+        <div class="sectionDerecha">
+            <img src="../../../assets/gamer-jugando-al-ordenador_52683-16140.png">
+            <p>Todo comienza con un sueño, lo demás es cuestión de querer hacerlo🙏🏼</p>
+        </div>
     </div>
 </div>

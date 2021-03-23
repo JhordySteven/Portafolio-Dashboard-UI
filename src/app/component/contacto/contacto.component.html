@@ -1,0 +1,26 @@
+<div class="contacto">
+    <div>
+        <section class="col-md-12" style="padding: 30px;">
+            <h1>Contacto</h1>
+            <div class="form-group">
+                <label for="">Nombre:</label>
+                <input class="form-control" type="text" placeholder="Ingresar Nombre" [(ngModel)]="objEmail.nombre" >
+            </div>
+            <div class="form-group">
+                <label for="">Email:</label>
+                <input class="form-control" type="text" placeholder="Ingresar Email" [(ngModel)]="objEmail.email" >
+            </div>
+            <div class="form-group">
+                <label for="">Empresa:</label>
+                <input class="form-control" type="text" placeholder="Ingresar Empresa" [(ngModel)]="objEmail.empresa">
+            </div>
+            <div class="form-group">
+                <label for="">Descripción:</label>
+                <textarea class="form-control" placeholder="Ingresar Descripción" aria-label="With textarea" [(ngModel)]="objEmail.descripcion"></textarea>
+            </div>
+            <div class="form-group" style="text-align: center;">
+                <button class="btn btn-dark" title="Enviar" (click)="enviarCorreo()"><i class="far fa-paper-plane"></i> Enviar</button>
+            </div>
+        </section>
+    </div>
+</div>

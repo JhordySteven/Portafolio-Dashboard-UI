@@ -10,16 +10,19 @@ import { WorkComponent } from './work/work.component';
 import { JobsComponent } from './jobs/jobs.component';
 import { NavLateralComponent } from './nav-lateral/nav-lateral.component';
 import { FooterComponent } from './footer/footer.component';
+import { ContactoComponent } from './contacto/contacto.component';
+import { FormsModule }   from '@angular/forms';
 
 
 @NgModule({
-  declarations: [NavbarComponent, PrincipalComponent, AboutComponent, SkillComponent, WorkComponent, JobsComponent, NavLateralComponent, FooterComponent],
+  declarations: [NavbarComponent, PrincipalComponent, AboutComponent, SkillComponent, WorkComponent, JobsComponent, NavLateralComponent, FooterComponent, ContactoComponent],
   imports: [
+    FormsModule,
     CommonModule,
     TooltipModule.forRoot(),
     NgxFontAwesomeModule
   ],exports:[
-    NavbarComponent, PrincipalComponent, AboutComponent, SkillComponent, WorkComponent, JobsComponent,NavLateralComponent,FooterComponent
+    NavbarComponent, PrincipalComponent, AboutComponent, SkillComponent, WorkComponent, JobsComponent,NavLateralComponent,FooterComponent,ContactoComponent
   ]
 })
 export class ComponentModule { }

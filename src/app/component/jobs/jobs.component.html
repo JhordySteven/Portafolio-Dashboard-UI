@@ -2,51 +2,11 @@
     <section><h1><u>Jobs</u></h1></section>
     <div class="contenedorJob">
         <section>
-            <div class="carta">
-                <img src="../../../assets/marketing-gif-2-1.gif">
+            <div class="carta" *ngFor="let x of arrayJobs">
+                <img src="{{x.foto}}">
                 <div class="info">
-                    <h1>IMGO</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos eius qui, animi nihil ipsa voluptates asperiores itaque ratione placeat dolorum alias, minima sint mollitia aperiam aliquam voluptatibus odit tempore perferendis.</p>
-                    <a href="">ver mas</a>
-                </div>
-            </div>
-            <div class="carta">
-                <img src="../../../assets/front-end-tools.png">
-                <div class="info">
-                    <h1>IMGO</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos eius qui, animi nihil ipsa voluptates asperiores itaque ratione placeat dolorum alias, minima sint mollitia aperiam aliquam voluptatibus odit tempore perferendis.</p>
-                    <a href="">ver mas</a>
-                </div>
-            </div>
-            <div class="carta">
-                <img src="../../../assets/programmador.png">
-                <div class="info">
-                    <h1>IMGO</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos eius qui, animi nihil ipsa voluptates asperiores itaque ratione placeat dolorum alias, minima sint mollitia aperiam aliquam voluptatibus odit tempore perferendis.</p>
-                    <a href="">ver mas</a>
-                </div>
-            </div>
-            <div class="carta">
-                <img src="../../../assets/programmador.png">
-                <div class="info">
-                    <h1>IMGO</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos eius qui, animi nihil ipsa voluptates asperiores itaque ratione placeat dolorum alias, minima sint mollitia aperiam aliquam voluptatibus odit tempore perferendis.</p>
-                    <a href="">ver mas</a>
-                </div>
-            </div>
-            <div class="carta">
-                <img src="../../../assets/programmador.png">
-                <div class="info">
-                    <h1>IMGO</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos eius qui, animi nihil ipsa voluptates asperiores itaque ratione placeat dolorum alias, minima sint mollitia aperiam aliquam voluptatibus odit tempore perferendis.</p>
-                    <a href="">ver mas</a>
-                </div>
-            </div>
-            <div class="carta">
-                <img src="../../../assets/programmador.png">
-                <div class="info">
-                    <h1>IMGO</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos eius qui, animi nihil ipsa voluptates asperiores itaque ratione placeat dolorum alias, minima sint mollitia aperiam aliquam voluptatibus odit tempore perferendis.</p>
+                    <h1>{{x.titulo}}</h1>
+                    <p>{{x.descripcion}}</p>
                     <a href="">ver mas</a>
                 </div>
             </div>

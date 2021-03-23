@@ -1,11 +1,10 @@
-<div class="about">
+<div class="about" *ngFor="let x of arrayAbout">
     <section class="izquierdaAbout">
-        <img src="../../../assets/IMG_20201209_075503.jpg">
+        <img src="{{x.foto}}">
     </section>
     <section class="derechaAbout">
         <div>
-            <p>Mi nombre es <b style="color: white;font-size: 22px  ;">Jhordy Vargas</b></p>
-            <p>Apasionado el desarrollo Web,  </p>
+            <p>{{x.descripcion}}</p>
             <a href="#">Contacto</a>
         </div>
     </section>

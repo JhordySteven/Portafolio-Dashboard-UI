@@ -49,8 +49,6 @@ export class MntSkillComponent implements OnInit {
     let idMaestro=3;
     this.fapi.fapiGetParameter('listMaestro',opcion+'/'+idMaestro).subscribe(x=>{
       this.objTipoSkill=x[0];
-      console.log('2');
-      console.log(this.objTipoSkill);
     })
   }
   openModal(template: TemplateRef<any>){
@@ -84,14 +82,11 @@ export class MntSkillComponent implements OnInit {
   objSkill:any;
   listarSkill(){
     this.mntSkill.opcion=5;
-    console.log('estado',this.mntSkill.estado);
     this.fapi.fapiGetParameter('listarSkill',this.mntSkill.opcion+'/'+this.mntSkill.estado).subscribe(x=>{
       this.objSkill=x[0];
-      console.log(this.objSkill);
     })
   }
   actualizarSkill(item,template: TemplateRef<any>) {
-    debugger
       this.tittleModal="::Actualizar Skill::";
       this.verBotonRegistrar=false;
       this.verBotonActualizar=true;

@@ -1,79 +1,31 @@
-
 <div class="skill">
     <section><h1><u>Skills</u></h1></section>
+    <div class="encabezado">
+        <p>Profesional con solidos conocimientos de Programación, 
+          con ganas de seguir aprendiendo y mejorando mis habilidades.👨‍💻
+        </p>
+    </div>
     <div>
         <section class="skillimg">
-            <img src="../../../assets/programmador.png">
+            <img src="../../../assets/00l8p1iqqfNP3HRG3TtTgXl-1.1587974089.fit_lim.fit_lim.size_956x-removebg-preview.png">
         </section>
         <section class="skills">
-            <div class="encabezado">
-                <p>Profesional con solidos conocimientos de Programación, 
-                   dispuesto a seguir aprendiendo y ampliando mis habilidades.
-                </p>
-            </div>
             <div class="cuerpo">
-                <div >
-                    <section class="tecnologias" style="background: #1F618D;">
-                       <section>
-                            <p>FrontEnd</p>
-                       </section>
+                <div *ngFor="let t of objTipoSkill">
+                    <section class="tecnologias"  [ngStyle]="{'background': t.desMaestro}">
+                      <section >
+                            <p>{{t.nombreMaestro}}</p>
+                      </section>
                     </section>
                     <div class="cuerpoList">
-                       <div class="seccionList">
-                            <ul>
-                                <li class="card"><i class="fab fa-html5" style="color: orangered;"></i> Html5</li>
-                                <li class="card"><i class="fab fa-css3-alt" style="color: blue;"></i> Css</li>
-                                <li class="card"><i class="fab fa-js" style="color: #F1C40F;"></i> Javascript</li>
-                                <li class="card"><i class="fab fa-angular" style="color: red;"></i> Angular</li>
-                                <li class="card"><i class="fab fa-vuejs" style="color: green;"></i> Vue</li>
-                                <li class="card"><i class="fab fa-bootstrap" style="color: purple;"></i> Bootstrap</li>
+                      <div class="seccionList">
+                            <ul *ngFor="let x of objSkill">
+                                <li class="card" *ngIf="x.idTipoSkill==t.maestroItem && x.estado==1"><i [ngClass]="x.imgSkill" [ngStyle]="{'color':x.colorImg}"></i> {{x.nombre}}</li>
                             </ul>
-                       </div>
+                      </div>
                     </div>
-                </div>
-                <div >
-                    <section class="tecnologias" style="background: #B03A2E;">
-                        <section>
-                            <p>BackEnd</p>
-                        </section>
-                    </section>
-                    <div class="cuerpoList">
-                        <div class="seccionList">
-                            <ul>
-                                <li class="card"><i class="fab fa-js" style="color: #F1C40F;"></i> Javascript</li>
-                                <li class="card"><i class="fab fa-node" style="color: green;"></i> Node.js</li>
-                                <li class="card"><i class="fab fa-node-js" style="color: green;"></i> Express.js</li>
-                                <li class="card"><i class="fas fa-database" style="color: #F1C40F;"></i> SQLServer</li>
-                                <li class="card"><i class="fas fa-database" style="color: #1F618D;"></i> MySql</li>
-                                <li class="card"><i class="fas fa-server" style="color: darkorchid;"></i> Heroku</li>
-                                <li class="card"><i class="fas fa-server" style="color: purple;"></i> c# & .Net</li>
-                                <li class="card"><i class="fas fa-fire" style="color: orangered;"></i> Firebase</li>
-                                <li class="card"><i class="fab fa-java" style="color: red;"></i> Java</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div >
-                    <section class="tecnologias" style="background: #117864;">
-                        <section>
-                            <p>Others</p>
-                        </section>
-                    </section>
-                    <section class="cuerpoList">
-                        <div class="seccionList">
-                            <ul>
-                                <li class="card"><i class="fab fa-git-alt" style="color: orangered;"></i> Git</li>
-                                <li class="card"><i class="fab fa-github" style="color: black;"></i> Github</li>
-                                <li class="card"><i class="fab fa-gitlab" style="color: orangered;"></i> GitLab</li>
-                                <li class="card"><i class="fab fa-npm" style="color: red;"></i> Npm</li>
-                                <li class="card"><i class="fab fa-keycdn" style="color: #B7950B;"></i> Scrum</li>
-                                <li class="card"><i class="fab fa-jira" style="color: blue;"></i> Jira</li>
-                                <li class="card"><i class="fas fa-user-astronaut" style="color: orangered;"></i> Postman</li>
-                            </ul>
-                        </div>
-                    </section>
                 </div>
             </div>
         </section>
     </div>
-</div>
+  </div>

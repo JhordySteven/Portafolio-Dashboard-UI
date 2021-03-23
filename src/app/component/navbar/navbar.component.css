@@ -266,6 +266,9 @@
         font-size: 17px;
         padding: 10px 20px;
     }
+    .navbar>ul>li>a{
+        color: white;
+    }
     .navbar>ul>li:hover{    
         transition: all 0.3s;
         cursor: pointer;

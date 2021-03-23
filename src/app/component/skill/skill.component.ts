@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FapiRestService } from 'src/app/Service/fapi-rest.service';
 
 @Component({
   selector: 'app-skill',
@@ -7,9 +8,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SkillComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fapi:FapiRestService) { }
 
   ngOnInit(): void {
+    this.listarSkill();
+    this.listarTipoSkill();
   }
-
+  mntSkill={
+    idSkill:0,
+    nombre:'',
+    tipoSkill:0,
+    imgSkill:'',
+    colorImg:'',
+    estado:0,
+    opcion:0
+  }
+  objTipoSkill:any;
+  objSkill:any;
+  listarSkill(){
+    this.mntSkill.estado=1;
+    this.mntSkill.opcion=5;
+    this.fapi.fapiGetParameter('listarSkill',this.mntSkill.opcion+'/'+this.mntSkill.estado).subscribe(x=>{
+      this.objSkill=x[0];
+    })
+  }
+  listarTipoSkill(){
+    let opcion=2;
+    let idMaestro=3;
+    this.fapi.fapiGetParameter('listMaestro',opcion+'/'+idMaestro).subscribe(x=>{
+      this.objTipoSkill=x[0];
+    })
+  }
 }

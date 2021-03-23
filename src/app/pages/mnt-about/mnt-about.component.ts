@@ -16,12 +16,12 @@ export class MntAboutComponent implements OnInit {
 
   ngOnInit(): void {
     this.listarAbout();
+    this.listarEstado();
   }
-  verBotonPreview=false;
-  verBotonRegistrar=false;
-  verBotonActualizar=false;
-  tittleModal="";
+  
+  titleModal="";
   arrayAbout:any;
+  objEstado:any;
   objAbout={
     idAbout:0,
     descripcion:'',
@@ -32,7 +32,7 @@ export class MntAboutComponent implements OnInit {
 
   openModal(template: TemplateRef<any>){
     this.modalRef = this.modalService.show(template);
-    this.tittleModal="::Registrar About::";
+    this.titleModal="::Registrar About::";
     this.verBotonRegistrar=true;
     this.verBotonActualizar=false;
   }
@@ -42,13 +42,19 @@ export class MntAboutComponent implements OnInit {
   }
 
   registrarAbout(){
-    this.objAbout.opcion=1;
-    this.objAbout.foto=this.files[0].name;
-    this.fapi.fapiPost("addAbout",this.objAbout).subscribe(x=>{
-      if(x=='ok'){
-        this.toast.success('Se registro correctamente.','¡AVISO!');
-      }
-    })
+    if(this.files.length>0){
+      this.objAbout.opcion=1;
+      this.objAbout.foto=this.files[0].name;
+      this.fapi.fapiPost("addAbout",this.objAbout).subscribe(x=>{
+        if(x=='ok'){
+          this.toast.success('Se registro correctamente.','¡AVISO!');
+        }
+      })
+    }
+    else{
+      this.toast.warning('Ingresar una imagen.','¡AVISO!');
+      return;
+    }
   }
   files: File[] = [];
   onSelect(event){
@@ -63,10 +69,14 @@ export class MntAboutComponent implements OnInit {
     this.fapi.fapiPost('subirFoto',formData) .subscribe(x=>{
     })
   }
-
+  verBotonPreview=false;
+  verBotonRegistrar=false;
+  verBotonActualizar=false;
+  verPreview=false;
+  verTabla=true;
   listarAbout(){
     this.objAbout.opcion=4;
-    this.fapi.fapiGetParameter("listarAbout",this.objAbout.opcion).subscribe(x=>{
+    this.fapi.fapiGetParameter("listarAbout",this.objAbout.opcion+'/'+this.objAbout.estado).subscribe(x=>{
       this.arrayAbout=x[0];
       for (let i = 0; i < this.arrayAbout.length; i++) {
         this.arrayAbout[i].foto=RutaImg+this.arrayAbout[i].foto;
@@ -89,6 +99,8 @@ export class MntAboutComponent implements OnInit {
     this.fapi.fapiPut('removeAbout',this.objAbout).subscribe(x=>{
       if(x='ok'){
         this.toast.success('Se elimino correctamente.','¡AVISO!');
+        this.modalService.hide();
+        this.listarAbout();
       }else{
         this.toast.warning('Algo no salio bien.','¡AVISO!');
       }
@@ -100,6 +112,8 @@ export class MntAboutComponent implements OnInit {
     this.fapi.fapiPut('removeAbout',this.objAbout).subscribe(x=>{
       if(x='ok'){
         this.toast.success('Se activo correctamente.','¡AVISO!');
+        this.modalService.hide();
+        this.listarAbout();
       }else{
         this.toast.warning('Algo no salio bien.','¡AVISO!');
       }
@@ -111,11 +125,49 @@ export class MntAboutComponent implements OnInit {
     this.objAbout.descripcion=x.descripcion;
     this.objAbout.foto=x.foto;
     this.obtenerFotoServer();
+    this.verBotonRegistrar=false;
+    this.verBotonActualizar=true;
   }
   obtenerFotoServer(){
     this.fapi.fapiGet("verFotos").subscribe(x=>{
       console.log(x);
     })
   }
+  listarEstado(){
+    let opcion=2;
+    let idMaestro=2;
+    this.fapi.fapiGetParameter('listMaestro',opcion+'/'+idMaestro).subscribe(x=>{
+      this.objEstado=x[0];
+    })
+  }
+  updateAbout(){
+    this.objAbout.opcion=2;
+    if(this.files.length>0){
+      this.objAbout.foto=this.files[0].name;
+      this.fapi.fapiPut('updateAbout',this.objAbout).subscribe(response=>{
+        if(response='ok'){
+          this.toast.success('Se actualizo correctamente.','¡AVISO!');
+          this.modalService.hide();
+          this.subirImagen();
+          this.listarAbout();
+        }else{
+          this.toast.warning('Algo salio mal.','¡AVISO!');
+        }
+      })
+    }else{
+      this.toast.warning('Ingresar una imagen.','¡AVISO!');
+      return;
+    }
+  }
 
+  openPreview(){
+    this.verPreview=true;
+    this.verTabla=false;
+    this.verBotonPreview=true;
+  }
+  closePreview(){
+    this.verPreview=false;
+    this.verTabla=true;
+    this.verBotonPreview=false;
+  }
 }

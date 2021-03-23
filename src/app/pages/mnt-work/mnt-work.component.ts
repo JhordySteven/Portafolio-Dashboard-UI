@@ -11,7 +11,7 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./mnt-work.component.css']
 })
 export class MntWorkComponent implements OnInit {
-
+  p:number=1;
   modalRef: BsModalRef;
   constructor(private fapi:FapiRestService,private modalService: BsModalService,private toast:ToastrService,private datePipe: DatePipe) { }
 
@@ -24,6 +24,7 @@ export class MntWorkComponent implements OnInit {
   tittleModal='';
   verBotonRegistrar=false;
   verBotonActualizar=false;
+  cuerpoTabla=true;
   verTabla:boolean=true;
   verPreview:boolean=false;
   verBotonPreview:boolean=false;
@@ -124,12 +125,14 @@ export class MntWorkComponent implements OnInit {
     this.verPreview=true;
     this.verTabla=false;
     this.verBotonPreview=true;
+    this.cuerpoTabla=false;
     this.listarWorkCliente();
   }
   closePreview(){
     this.verPreview=false;
     this.verTabla=true;
     this.verBotonPreview=false;
+    this.cuerpoTabla=true;
   }
   //cerrar venatana
   closeModal(): void {

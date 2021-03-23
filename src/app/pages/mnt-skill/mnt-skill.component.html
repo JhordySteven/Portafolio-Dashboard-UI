@@ -32,10 +32,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let x of objSkill | paginate: { id: 'foo',
+            <tr *ngFor="let x of objSkill | paginate: { 
             itemsPerPage: 5,
-            currentPage: p,
-            totalItems: total }">
+            currentPage: p }">
               <th class="text-center">{{x.idskill}}</th>
               <th class="text-center">{{x.nombre}}</th>
               <th class="text-center">{{x.imgSkill}}
@@ -52,7 +51,7 @@
             </tr>
           </tbody>
         </table>
-        <pagination-controls id="foo" (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
 <div class="col-md-12 preview" *ngIf="verPreview">  
   <div class="skill">
