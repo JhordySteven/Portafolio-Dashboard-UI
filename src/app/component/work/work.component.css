@@ -1,5 +1,5 @@
 /* For desktop: */
-@media only screen and (min-width: 1650px) {  
+@media only screen and (min-width: 1200px) {  
 .work{
     width: 100%;
     height: 100vh;
@@ -8,6 +8,7 @@
     background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     padding: 40px 20px;
+    border-bottom: 2px solid #F5B041;
 }
 .work>div{
     width: 100%;
@@ -195,205 +196,198 @@
   }
 }
 /*Tabletas*/
-@media only screen and (min-width: 600px) and (max-width:768px) {
+@media only screen and (min-width: 768px) and (max-width:1200px) {
   .work{
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    padding: 20px;
     background: #abbaab;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #ffffff, #abbaab);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #ffffff, #abbaab); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .work>div{
-    width: 100%;
-    height: 90%;
-    overflow: hidden;
-    display: flex;
+  width: 100%;
+  height: 90%;
+  overflow: hidden;
+  display: flex;
 }
-.work>section{
-    font-family: 'Teko', sans-serif;
-    color: #141E30;
-    height: 10%;
-    width: 100%;
-    display: flex;
-    text-align: center;
-}
-.work>section>h1{
-    margin: auto auto;
-    color: black;
+.work>h1{
+  margin: auto auto;
+  color: black;
+  font-family: 'Teko', sans-serif;
+  color: #141E30;
+  text-align: center;
 }
 .work>div>div{
-    width: 90%;
-    height: 90%;
-    margin: auto auto;
-    border-style: dashed ; 
-    border-width: 2px;
-    border-color: #8d9292;
-    border-radius: 20px;
+  width: 90%;
+  height: 80%;
+  margin: auto auto;
+  border-style: dashed ; 
+  border-width: 2px;
+  border-color: #8d9292;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
 }
-.headerWork{
-    width: 100%;
-    height: 20%;
-    padding: 5px 20px;
-    overflow: hidden;
-    text-align: center;
+.work>div>div>p{
+  font-size: 20px;
+  text-align: center;
 }
-.headerWork>p{
-    font-size: 15px;
+.work>div>div>a{
+  text-decoration: none;
+  padding: 5px 20px;
+  background: white;
+  color: black;
+  border-radius: 5px;
+  font-family: 'Titillium Web', sans-serif;
 }
-.headerWork>a{
-    text-decoration: none;
-    padding: 5px 20px;
-    background: white;
-    color: black;
-    border-radius: 5px;
-    font-family: 'Titillium Web', sans-serif;
-}
-.headerWork>a:hover{
-    background: tomato;
-    color: white;
+.work>div>div>a:hover{
+  background: tomato;
+  color: white;
 }
 .contenedorWork{
-    width: 100%;
-    height: 80%;
-    margin: auto auto;
-    padding: 0px;
-    overflow-x:auto;
+  width: 100%;
+  height: 80%;
+  margin: auto auto;
+  padding: 0px;
+  overflow-x:auto;
 }
-  /* TIMELINE
-  –––––––––––––––––––––––––––––––––––––––––––––––––– */
-  
-  .timeline {
-    width: 100%;
-    height: 100%;
-    white-space: nowrap;
-    display: flex;
-    margin: 0px;
-  }
-  .timeline::before{
-    display: none;
-  }
-  .timeline>ol {
-    font-size: 0;
-    transition: all 1s;
-    margin: auto auto;
-    padding: 0px;
-  }
-  
-  .timeline>ol>li {
-    position: relative;
-    display: inline-block;
-    list-style-type: none;
-    width: 100px;
-    height: 3px;
-    background: #fff;
-  }
-  
-  .timeline>ol>li:last-child {
-    width: 200px;
-  }
-  
-  .timeline>ol>li:not(:first-child) {
-    margin-left: 14px;
-  }
-  
-  .timeline>ol>li:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: calc(100% + 1px);
-    bottom: 0;
-    width: 12px;
-    height: 12px;
-    transform: translateY(-50%);
+/* TIMELINE
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.timeline {
+  width: 100%;
+  height: 100%;
+  white-space: nowrap;
+  display: flex;
+  margin: 0px;
+}
+.timeline::before{
+  display: none;
+}
+.timeline>ol {
+  font-size: 0;
+  transition: all 1s;
+  margin: auto auto;
+  padding: 0px;
+}
+
+.timeline>ol>li {
+  position: relative;
+  display: inline-block;
+  list-style-type: none;
+  width: 150px;
+  height: 3px;
+  background: #fff;
+}
+
+.timeline>ol>li:last-child {
+  width: 200px;
+}
+
+.timeline>ol>li:not(:first-child) {
+  margin-left: 14px;
+}
+
+.timeline>ol>li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 1px);
+  bottom: 0;
+  width: 12px;
+  height: 12px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: #1B2631;
+}
+
+.timeline>ol>li>div {
+  position: absolute;
+  left: calc(100% + 1px);
+  width: 230px;
+  height: auto;
+  padding: 5px 15px;
+  font-size: 1rem;
+  white-space: normal;
+  color: black;
+  background: #D5DBDB;
+  box-shadow: 1px 1px 20px -6px #232526;
+  border-radius: 20px;
+  overflow: hidden;
+  justify-content: center;
+  font-family: 'Titillium Web', sans-serif;
+}
+.timeline>ol>li>div>section{
+  width: 100%;
+  height: auto;
+  display: flex;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+}
+.timeline>ol>li>div>section>img{
+    width: 70px;
+    height: 70px;
+    border: 2px solid #141E30;
+    margin: 0 auto;
     border-radius: 50%;
-    background: #1B2631;
-  }
-  
-  .timeline>ol>li>div {
-    position: absolute;
-    left: calc(100% + 7px);
-    width: 250px;
-    height: 150px;
-    padding: 5px 15px;
-    font-size: 1rem;
-    white-space: normal;
-    color: black;
-    background: #D5DBDB;
-    /*box-shadow: 1px 1px 20px -6px #232526;*/
-    border-radius: 20px;
-    overflow: hidden;
-    justify-content: center;
-    font-family: 'Titillium Web', sans-serif;
-  }
-  .timeline>ol>li>div>section{
-    width: 100%;
-    height: auto;
-    display: flex;
-    margin: 0px;
-    padding: 0px;
-    overflow: hidden;
-  }
-  .timeline>ol>li>div>section>img{
-      width: 50px;
-      height: 50px;
-      border: 2px solid #141E30;
-      margin: 0 auto;
-      border-radius: 50%;
-  }
-  .timeline>ol>li>div>section>img:hover {
-    animation: 2s rebote 1;
-    cursor: pointer;
+    margin-top: 5px;
+}
+.timeline>ol>li>div>section>img:hover {
+  animation: 2s rebote 1;
+  cursor: pointer;
 }
 
 @keyframes rebote{
-      20%, 50%, 80%{
-          transform: translateY(0px);
-      }
-      30%{
-          transform: translateY(-10px);
-      }
-      60%{
-          transform: translateY(-5px);
-      }
+    20%, 50%, 80%{
+        transform: translateY(0px);
+    }
+    30%{
+        transform: translateY(-3px);
+    }
+    60%{
+        transform: translateY(-3px);
+    }
 }
 
-  .timeline>ol>li>div>p{
-    display: block;
-    margin: 0px;
-  }
-  .timeline>ol>li>div::before {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 0;
-    height: 0;
-    border-style: solid;
-  }
-  
-  .timeline>ol>li:nth-child(odd) div {
-    top: -16px;
-    transform: translateY(-100%);
-  }
-  
-  .timeline>ol>li:nth-child(odd) div::before {
-    top: 100%;
-    border-width: 8px 8px 0 0;
-    border-color: white transparent transparent transparent;
-  }
-  
-  .timeline>ol>li:nth-child(even) div {
-    top: calc(100% + 16px);
-  }
-  
-  .timeline>ol>li:nth-child(even) div::before {
-    top: -8px;
-    border-width: 8px 0 0 8px;
-    border-color: transparent transparent transparent white;
-  }
-  .timeline>ol>li>div>span{
-      float: right;
-      font-size: 13px;
-  }
+.timeline>ol>li>div>p{
+  display: block;
+  margin: 0px;
+}
+.timeline>ol>li>div::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+}
+
+.timeline>ol>li:nth-child(odd) div {
+  top: -16px;
+  transform: translateY(-100%);
+}
+
+.timeline>ol>li:nth-child(odd) div::before {
+  top: 100%;
+  border-width: 8px 8px 0 0;
+  border-color: white transparent transparent transparent;
+}
+
+.timeline>ol>li:nth-child(even) div {
+  top: calc(100% + 16px);
+}
+
+.timeline>ol>li:nth-child(even) div::before {
+  top: -8px;
+  border-width: 8px 0 0 8px;
+  border-color: transparent transparent transparent white;
+}
+.timeline>ol>li>div>span{
+    float: right;
+    font-size: 13px;
+}
 }

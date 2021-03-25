@@ -1,12 +1,12 @@
-
 /*Compu*/
-@media only screen and (min-width: 1650px) { 
+@media only screen and (min-width: 1200px) { 
     .contenedor{
         width: 100%;
         height: 90vh;
         background: #141E30;  
         background: -webkit-linear-gradient(to right, #243B55, #141E30);  
         background: linear-gradient(to right, #243B55, #141E30); 
+        border-bottom: 2px solid #F5B041;
     }
     .contenedor>div{
         width: 100%;
@@ -24,7 +24,7 @@
         width: 50%;
     }
     .sectionIzquierda>section{
-        width: 60%;
+        width: 80%;
         height: auto;
         overflow: hidden;
         margin: auto auto;
@@ -70,19 +70,24 @@
         width: 50%;
         height: 100%;
         overflow: hidden;
+        padding: 20px;
+        display: flex;
     }
     .sectionDerecha>img{
         width: 100%;
-        height: 90%;
-        display: block;
+        height: 80%;
         margin: auto auto;
         border-radius: 30px;
+        vertical-align:middle;
     }
     .sectionDerecha>p{
         color: white;
+        position: absolute;
+        overflow: hidden;
+        bottom: 40px;
+        font-size: 15px;
         text-align: center;
         font-family: 'Titillium Web', sans-serif;
-        font-size: 20px;
     }
     .sectionDerecha>p:hover{
         cursor: default;
@@ -98,7 +103,6 @@
         border: 0px;
     }
 }
-
 
 /* For desktop: */
 /*@media only screen and (max-width: 1650px) {   
@@ -172,24 +176,29 @@
     }
 }*/
 /*Tabletas*/
-/*@media only screen and (width: 600px)  {
+@media only screen and (min-width: 768px) and (max-width:1200px)  {
     .contenedor{
         padding: 0px 20px;
         width: 100%;
         height: 90vh;
-        background: #141E30;  
+        background:#141E30;  
+        overflow: hidden;
         background: -webkit-linear-gradient(to right, #243B55, #141E30);  
         background: linear-gradient(to right, #243B55, #141E30); 
     }
     .contenedor>div{
-        width: 50%;
-        float: left;
+        width: 100%;
         height: 100%;
         overflow: hidden;
         display: flex;
     }
+    .sectionIzquierda{
+        width: 50%;
+        height: 100%;
+        display: flex;
+    }
     .sectionIzquierda>section{
-        width: 100%;
+        width: 80%;
         height: auto;
         overflow: hidden;
         margin: auto auto;
@@ -225,23 +234,39 @@
     .sectionIzquierda>section>ul>a:hover{
         opacity: 0.6;
     }
+    #cv{
+        display: block;
+        padding: 10px 15px;
+        float: left;
+        margin-right: 10px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: white;
+        border: 0px;
+    }
     .sectionDerecha{
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        padding: 20px;
         display: flex;
+        position: relative;
     }
     .sectionDerecha>img{
         width: 100%;
-        height: 90%;
+        height: 60%;
         margin: auto auto;
         border-radius: 30px;
+        vertical-align:middle;
     }
     .sectionDerecha>p{
         color: white;
+        display: block;
         position: absolute;
-        overflow: hidden;
-        bottom: 40px;
-        right: 50px;
-        font-family: 'Satisfy', cursive;
-        font-size: 23px;
-        display: none;
+        bottom: 120px;
+        left: 0px;
+        font-size: 15px;
+        padding: 0px 20px;
+        font-family: 'Titillium Web', sans-serif;
     }
-}*/
+}

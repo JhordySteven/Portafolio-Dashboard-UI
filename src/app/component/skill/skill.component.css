@@ -1,5 +1,5 @@
 /* For desktop: */
-@media only screen and (min-width: 1650px) {   
+@media only screen and (min-width: 1200px) {   
     .skill{
         width: 100%;
         height: 100vh;
@@ -8,6 +8,7 @@
         background: #141E30;  /* fallback for old browsers */
         background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
         background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        border-bottom: 2px solid #F5B041;
     }
     .skill>section{
         font-family: 'Teko', sans-serif;
@@ -119,7 +120,7 @@
     .cuerpo>div>.cuerpoList{
         width: 100%;
         height: auto;
-        border-radius: 0px 0px 20px 20px;
+        border-radius: 10px 30px;
         overflow: auto;
         display:block;
         background: #CACFD2;
@@ -158,7 +159,7 @@
     }
 }
 /*Tabletas*/
-/*@media only screen and (width: 600px) and (width:768px) {
+@media only screen and (min-width: 768px) and (max-width:1200px)  {
     .skill{
         width: 100%;
         height: 100vh;
@@ -277,10 +278,11 @@
     }
     .cuerpo>div>.cuerpoList{
         width: 100%;
-        height:  80%;
         overflow: auto;
+        height: auto;
         display:block;
         background: #E5E8E8;
+        border-radius: 0px 0px 20px 20px  ;
     }
     .cuerpo>div>.cuerpoList>.seccionList{
         width: 100%;
@@ -314,4 +316,4 @@
         width: 40px;
         height: 40px;
     }
-}*/
+}
