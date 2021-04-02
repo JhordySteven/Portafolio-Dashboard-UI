@@ -34,7 +34,8 @@ export class MntJobsComponent implements OnInit {
     estado:0,
     opcion:0
   }
-
+  nombreDato:string="";
+  
   openModal(template: TemplateRef<any>){
     this.modalRef = this.modalService.show(template);
     this.tittleModal="::Registrar About::";
@@ -54,6 +55,8 @@ export class MntJobsComponent implements OnInit {
         if(x=='ok'){
           this.subirImagen();
           this.toast.success('Se registro correctamente.','¡AVISO!');
+          this.closeModal();
+          this.limpiarTexto();
           this.listarJobs();
         }
       })
@@ -85,7 +88,6 @@ export class MntJobsComponent implements OnInit {
       }
     })
   }
-  nombreDato:string="";
   openModalEliminacion(x,template: TemplateRef<any>){
     this.modalRef = this.modalService.show(template);
     this.nombreDato=x.descripcion;
@@ -151,6 +153,7 @@ export class MntJobsComponent implements OnInit {
         if(response='ok'){
           this.toast.success('Se actualizo correctamente.','¡AVISO!');
           this.modalService.hide();
+          this.limpiarTexto();
           this.subirImagen();
           this.listarJobs();
         }else{
@@ -173,5 +176,12 @@ export class MntJobsComponent implements OnInit {
     this.verTabla=true;
     this.verBotonPreview=false;
   }
-
+  limpiarTexto(){
+    this.objJobs.idtrabajos=0;
+    this.objJobs.descripcion='';
+    this.objJobs.estado=0;
+    this.objJobs.foto='';
+    this.objJobs.titulo='';
+    this.objJobs.opcion=0;
+  }
 }

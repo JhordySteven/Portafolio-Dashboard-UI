@@ -17,11 +17,12 @@
         text-align: center;
     }
     .contacto>div{
-        width: 30%;
+        width: 350px;
         /*background-image: url("../../../assets/contacto-fondo.jpg");
         background-size: cover;*/
         background-color: #D7DBDD ;
         border-radius: 20px;
+        box-shadow: 10px 10px 20px #181818;
     }
 }
 

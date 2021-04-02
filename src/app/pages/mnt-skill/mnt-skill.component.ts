@@ -56,6 +56,7 @@ export class MntSkillComponent implements OnInit {
     this.tittleModal="::Registrar Skill::";
     this.verBotonRegistrar=true;
     this.verBotonActualizar=false;
+    this.limpiarInput();
   }
   openModalEliminacion(item,template: TemplateRef<any>){
     this.modalRef = this.modalService.show(template);
@@ -102,7 +103,7 @@ export class MntSkillComponent implements OnInit {
     this.mntSkill.opcion=2;
     this.fapi.fapiPut('updateSkill',this.mntSkill).subscribe(x=>{
       if(x='ok'){
-        this.toast.success('Se registro correctamente.','¡AVISO!');
+        this.toast.success('Se actualizo correctamente.','¡AVISO!');
         this.closeModal();
         this.listarSkill();
       }else{

@@ -1,6 +1,6 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FapiRestService } from 'src/app/Service/fapi-rest.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contacto',
@@ -9,7 +9,7 @@ import { FapiRestService } from 'src/app/Service/fapi-rest.service';
 })
 export class ContactoComponent implements OnInit {
 
-  constructor(private fapi:FapiRestService) { }
+  constructor(private fapi:FapiRestService,private toast:ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -21,10 +21,15 @@ export class ContactoComponent implements OnInit {
   }
 
   enviarCorreo(){
-    this.fapi.fapiPost('sendEmail',this.objEmail).subscribe(response=>{
-      console.log(response);
-      this.limpiarText();
-    })
+    if(this.objEmail.nombre=="" || this.objEmail.email=="" || this.objEmail.empresa=="" || this.objEmail.descripcion=="")
+    {
+      this.toast.warning("Ingresar los datos correctos para el envio de correo.");
+    }else{
+      this.fapi.fapiPost('sendEmail',this.objEmail).subscribe(response=>{
+        console.log(response);
+        this.limpiarText();
+      })
+    }
   }
   limpiarText(){
     this.objEmail.nombre='';

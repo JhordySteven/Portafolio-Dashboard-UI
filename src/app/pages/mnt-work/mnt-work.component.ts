@@ -53,13 +53,14 @@ export class MntWorkComponent implements OnInit {
     this.tittleModal="::Registrar Work::";
     this.verBotonRegistrar=true;
     this.verBotonActualizar=false;
+    this.limpiarTexto();
   }
   actualizarModal(item,template: TemplateRef<any>){
     this.modalRef = this.modalService.show(template);
     this.tittleModal="::Actualizar Work::";
     this.verBotonRegistrar=false;
     this.verBotonActualizar=true;
-    /**/
+    
     this.mntWork.idWork=item.idwork;
     this.mntWork.nombre=item.nombre;
     this.mntWork.estudio=item.estudio;
@@ -84,7 +85,6 @@ export class MntWorkComponent implements OnInit {
     const formData=new FormData();
     formData.append('archivo',this.files[0]);
     this.fapi.fapiPost('subirFoto',formData) .subscribe(x=>{
-      
     })
   }
 
@@ -95,6 +95,7 @@ export class MntWorkComponent implements OnInit {
       if(x=='ok'){
         this.toast.success('Se registro correctamente.','AVISO');
         this.subirImagen();
+        this.limpiarTexto();
         this.listarWork();
       }
     })
@@ -137,6 +138,7 @@ export class MntWorkComponent implements OnInit {
   //cerrar venatana
   closeModal(): void {
     this.modalService.hide();
+    this.limpiarTexto();
   }
   //eliminar
   eliminarWork(){
@@ -183,10 +185,20 @@ export class MntWorkComponent implements OnInit {
         this.toast.success('Se actualizo correctamente.','!AVISO¡');
         this.modalService.hide();
         this.subirImagen();
+        this.limpiarTexto();
         this.listarWork();
       }else{
         this.toast.error('Algo salio mal.','!AVISO¡');
       }
     })
+  }
+  limpiarTexto(){
+    this.mntWork.idWork=0;
+    this.mntWork.nombre='';
+    this.mntWork.estudio='';
+    this.mntWork.fechaInicio='';
+    this.mntWork.fechaFin='';
+    this.mntWork.imagen='';
+    this.mntWork.estado=0;
   }
 }

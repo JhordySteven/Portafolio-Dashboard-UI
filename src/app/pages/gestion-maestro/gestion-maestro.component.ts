@@ -50,7 +50,6 @@ export class GestionMaestroComponent implements OnInit {
     this.mntMaestro.opcion=1;
     this.fapi.fapiGetParameter('listMaestro',this.mntMaestro.opcion+'/'+this.mntMaestro.idMaestro).subscribe(x=>{
       this.itemMaestro=x[0];
-      console.log(this.itemMaestro);
       this.tittleTabla=":: Editar Tabla ::";
       this.verificarBotonTabla=true;
     });
@@ -60,7 +59,6 @@ export class GestionMaestroComponent implements OnInit {
   listarItemMaestro(){
     this.mntMaestro.idMaestro=this.selTabla.idMaestro;
     if(this.mntMaestro.idMaestro==0){
-      console.log("seleccionar corectamente");
       this.itemMaestro=[];
       this.listarTablaMaestro();
       return;
@@ -68,7 +66,6 @@ export class GestionMaestroComponent implements OnInit {
       this.mntMaestro.opcion=2;
       this.fapi.fapiGetParameter('listMaestro',this.mntMaestro.opcion+'/'+this.mntMaestro.idMaestro).subscribe(x=>{
         this.itemMaestro=x[0];
-        console.log(this.itemMaestro);
         if(this.itemMaestro.length>0){
           this.verificarBotonTabla=false;
         }
@@ -78,7 +75,6 @@ export class GestionMaestroComponent implements OnInit {
 
   //Seleccion de Tabla o item
   selecTabla(){
-    console.log(this.mntMaestro.idMaestro);
     if(this.selTabla.idMaestro!=0){
       this.verRegistrar=true;
     }else{
@@ -88,7 +84,6 @@ export class GestionMaestroComponent implements OnInit {
 
   //abir modal Registrar
   modalRegistrar(template: TemplateRef<any>) {
-    debugger
     this.modalRef = this.modalService.show(template); 
     if(this.selTabla.idMaestro==0){
       this.tittleTabla=":: Registrar Tabla ::";
@@ -103,7 +98,6 @@ export class GestionMaestroComponent implements OnInit {
     this.mntMaestro.opcion=3;
     this.fapi.fapiPost('addMaestro',this.mntMaestro).subscribe(x=>{
       if(x=='ok'){
-        console.log("ok");
         this.modalService.hide();
         this.listarTablaMaestro();
         this.limpiarInput();
@@ -157,9 +151,12 @@ export class GestionMaestroComponent implements OnInit {
     this.mntMaestro.desMaestro=item.desMaestro;
     this.mntMaestro.maestroItem=item.maestroItem;
     this.modalRef = this.modalService.show(template);
+    this.limpiarInput();
   }
   //actualizar Item
   actualizarItem(){
+    debugger
+    console.log(this.mntMaestro);
     this.mntMaestro.idMaestro=this.selTabla.idMaestro;
     this.mntMaestro.opcion=6;
     this.fapi.fapiPut('updateMaestro',this.mntMaestro).subscribe(x=>{
@@ -194,12 +191,12 @@ export class GestionMaestroComponent implements OnInit {
     this.mntMaestro.opcion=5;
     this.fapi.fapiPut('updateMaestro',this.mntMaestro).subscribe(x=>{
       if(x=='ok'){
-        console.log("bien");
+        this.toastr.success('Se actualizo correctmante','¡AVISO!');
         this.modalService.hide();
         this.listarTablaMaestro();
         this.limpiarInput();
       }else{
-        console.log("mal");
+        this.toastr.warning('Algo salio mal...','¡AVISO!');
         this.modalService.hide();
       }
     })
@@ -209,7 +206,7 @@ export class GestionMaestroComponent implements OnInit {
     this.mntMaestro.opcion=7;
     this.fapi.fapiPut('removeMaestro',this.mntMaestro).subscribe(x=>{
       if(x=='ok'){
-        this.toastr.success('¡AVISO!','Se elimino correctamente.');
+        this.toastr.success('Se elimino correctamente.','¡AVISO!');
         this.modalService.hide();
         this.listarTablaMaestro();
         this.listarItemMaestro();
@@ -223,7 +220,7 @@ export class GestionMaestroComponent implements OnInit {
     this.mntMaestro.opcion=8;
     this.fapi.fapiPut('activateMaestro',this.mntMaestro).subscribe(x=>{
       if(x=='ok'){
-        this.toastr.success('¡AVISO!','Se activo correctamente.');
+        this.toastr.success('Se activo correctamente.','¡AVISO!');
         this.modalService.hide();
         this.listarTablaMaestro();
         this.listarItemMaestro();

@@ -33,7 +33,8 @@
           <tbody>
             <tr *ngFor="let x of arrayPrincipal| paginate: { 
               itemsPerPage: 5,
-              currentPage: p }">
+              currentPage: p ,
+              id: 'some'}">
               <th class="text-center">{{x.idprincipal}}</th>
               <th class="text-center">{{x.nombre}}</th>
               <th class="text-center">{{x.descripcion}}</th>
@@ -54,7 +55,7 @@
             </tr>
           </tbody>
         </table>
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls id="some" (pageChange)="p = $event"></pagination-controls>
 </div>
   
 <div class="col-md-12 preview" *ngIf="verPreview">  
@@ -143,8 +144,8 @@
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body" >
-        <table class="table table-striped" >
+  <div class="modal-body">
+        <table class="table table-striped col-md-12" >
           <thead class="tableStyle">
             <tr>
               <th class="text-center">#</th>
@@ -154,22 +155,35 @@
               <th class="text-center"></th>
             </tr>
           </thead>
-          <tbody>
+          <tbody *ngIf="accionUpdateRedes==false">
             <tr *ngFor="let x of arrayRedes| paginate: { 
               itemsPerPage: 5,
-              currentPage: p }">
+              currentPage: pa ,
+              id: 'some_id'}">
               <th class="text-center">{{x.idredes}}</th>
               <th class="text-center">{{x.titulo}}</th>
               <th class="text-center">{{x.clases}}</th>
               <th class="text-center">{{x.ruta}}</th>
               <th class="text-center">
                 <button *ngIf="x.estado==1" title="Eliminar" class="btn btn-danger btn-xs btnMargin" (click)="eliminarRedes(x.idredes)"><i class="fas fa-trash-alt"></i></button>
+                <button *ngIf="x.estado==1" class="btn btn-warning btn-xs btnMargin" (click)="actualizarRedes(x)"><i class="fas fa-save"></i></button>
                 <button *ngIf="x.estado==2" class="btn btn-info btn-xs btnMargin" title="Activar" (click)="activarRedes(x.idredes)"><i class="fas fa-check-square"></i></button>
               </th>
             </tr>
           </tbody>
+          <tfoot *ngIf="accionUpdateRedes==true">
+            <tr>
+              <th><input type="text" class="form-control input-sm" [(ngModel)]="objRedes.idredes"></th>
+              <th><input type="text" class="form-control input-sm" [(ngModel)]="objRedes.titulo"></th>  
+              <th><input type="text" class="form-control input-sm" [(ngModel)]="objRedes.clases"></th>
+              <th><input type="text" class="form-control input-sm" [(ngModel)]="objRedes.ruta"></th>
+              <th><button class="btn btn-xs btn-success"><span class="fa fa-check" (click)="updateRedes()"></span></button>
+                  <button class="btn btn-xs btn-default" (click)="cancelarRedes()"><span class="fa fa-undo"></span></button>
+              </th>
+            </tr>
+          </tfoot>
         </table>
-        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        <pagination-controls id="some_id" (pageChange)="pa = $event"></pagination-controls>
   </div>
   <div class="modal-footer">
       <button class="btn btn-light btnMargin" (click)="closeModal()"><i class="fas fa-times"></i> Salir</button>

@@ -2,7 +2,7 @@
     <div class="col-md-2 divSelFiltro">
         <div class="form-group">
             <label for="">Estado:</label>
-            <select class="form-control" [(ngModel)]="mntSkill.estado">
+            <select [disabled]="verBotonPreview==true" class="form-control" [(ngModel)]="mntSkill.estado">
                 <option [value]="0">::Seleccione::</option>
                 <option *ngFor="let x of objEstado" [value]="x.maestroItem">{{x.nombreMaestro}}</option>
             </select>
@@ -54,37 +54,7 @@
         <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
 <div class="col-md-12 preview" *ngIf="verPreview">  
-  <div class="skill">
-    <section><h1><u>Skills</u></h1></section>
-    <div>
-        <section class="skillimg">
-            <img src="../../../assets/programmador.png">
-        </section>
-        <section class="skills">
-            <div class="encabezado">
-                <p>Profesional con solidos conocimientos de Programación, 
-                  dispuesto a seguir aprendiendo y ampliando mis habilidades.
-                </p>
-            </div>
-            <div class="cuerpo">
-                <div *ngFor="let t of objTipoSkill">
-                    <section class="tecnologias"  [ngStyle]="{'background': t.desMaestro}">
-                      <section >
-                            <p>{{t.nombreMaestro}}</p>
-                      </section>
-                    </section>
-                    <div class="cuerpoList">
-                      <div class="seccionList">
-                            <ul *ngFor="let x of objSkill">
-                                <li class="card" *ngIf="x.idTipoSkill==t.maestroItem && x.estado==1"><i [ngClass]="x.imgSkill" [ngStyle]="{'color':x.colorImg}"></i> {{x.nombre}}</li>
-                            </ul>
-                      </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
-  </div>
+  <app-skill></app-skill>
 </div>
     
 <ng-template #skill>

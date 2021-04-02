@@ -46,16 +46,25 @@ export class MntPrincipalComponent implements OnInit {
     estado:0,
     opcion:0
   }
-
+  accionUpdateRedes=false;
+  files: File[] = [];
   openModal(template: TemplateRef<any>){
+    this.limpiarPrincipal();
+    this.onRemoveTotal();
     this.modalRef = this.modalService.show(template);
     this.titleModal="::Registrar Principal::";
     this.verBotonRegistrar=true;
     this.verBotonActualizar=false;
   }
+  limpiarPrincipal(){
+    this.objPrincipal.nombre='';
+    this.objPrincipal.descripcion='';
+  }
   //cerrar venatana
   closeModal(): void {
     this.modalService.hide();
+    this.onRemoveTotal();
+    this.limpiarPrincipal();
   }
 
   registrarPrincipal(){
@@ -76,11 +85,22 @@ export class MntPrincipalComponent implements OnInit {
       return;
     }
   }
-  files: File[] = [];
   onSelect(event){
+    debugger
+    let result = "http://localhost:8888/sources/programador-ilustracion-decorativa-diseno-isometrico_23-2148250395.jpg";
+    let f =  fetch(result).then(r => r.blob()).then(blobFile => new File([blobFile], "programador-ilustracion-decorativa-diseno-isometrico_23-2148250395", { type: "image/png" }));
+    console.log(f);
+
+    /*console.log(event.addedFiles);
     if(this.files.length<1){
       this.files.push(...event.addedFiles);
-      }
+      }*/
+  }
+  onRemove(event) {
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+  onRemoveTotal(){
+    this.files=[];
   }
   subirImagen(){
     const formData=new FormData();
@@ -113,7 +133,7 @@ export class MntPrincipalComponent implements OnInit {
     this.objPrincipal.opcion=4;
     this.fapi.fapiPut('removePrincipal',this.objPrincipal).subscribe(x=>{
       if(x='ok'){
-        this.toast.success('Se activo correctamente.','¡AVISO!');
+        this.toast.success('Se elimino correctamente.','¡AVISO!');
         this.modalService.hide();
         this.listarPrincipal();
       }else{
@@ -152,7 +172,7 @@ export class MntPrincipalComponent implements OnInit {
     this.objPrincipal.opcion=3;
     this.fapi.fapiPut('activatePrincipal',this.objPrincipal).subscribe(x=>{
       if(x='ok'){
-        this.toast.success('Se elimino correctamente.','¡AVISO!');
+        this.toast.success('Se activo correctamente.','¡AVISO!');
         this.modalService.hide();
         this.listarPrincipal();
       }else{
@@ -174,6 +194,7 @@ export class MntPrincipalComponent implements OnInit {
   verBotonRegRedes=false;
   verBotonActualizarRedes=false;
   RegistrarRed(x,template: TemplateRef<any>){
+    this.limpiarTexto();
     this.modalRef = this.modalService.show(template);
     this.titleModal="::Registrar Redes::";
     this.objRedes.idprincipal=x.idprincipal;
@@ -185,17 +206,45 @@ export class MntPrincipalComponent implements OnInit {
     this.titleModal="::Detalle Redes::";
     this.objRedes.idprincipal=x.idprincipal;
     this.listarDetalleRedes(this.objRedes.idprincipal);
+    this.accionUpdateRedes=false;
   }
   RegistrarRedes(){
-    this.objRedes.opcion=1;
-    this.fapi.fapiPost("addRedes",this.objRedes).subscribe(x=>{
-      if(x=='ok'){
-        this.toast.success('Se registro correctamente.','¡AVISO!');
-        this.limpiarTexto();
-        this.listarPrincipal();
-        this.closeModal();
-      }
-    })
+    if(this.objRedes.titulo!=''&&this.objRedes.clases!=''&&this.objRedes.ruta!=''&&this.objRedes.style!=''){
+      this.objRedes.opcion=1;
+      this.fapi.fapiPost("addRedes",this.objRedes).subscribe(x=>{
+        if(x=='ok'){
+          this.toast.success('Se registro correctamente.','¡AVISO!');
+          this.limpiarTexto();
+          this.listarPrincipal();
+          this.closeModal();
+        }
+      })  
+    }else{
+      this.toast.warning('Ingresar los datos correctamente.','¡AVISO!');
+    }
+  }
+  updateRedes(){
+      this.objRedes.opcion=2;
+      this.fapi.fapiPut("updateRedes",this.objRedes).subscribe(x=>{
+        if(x=='ok'){
+          this.toast.success('Se actualizo correctamente.','¡AVISO!');
+          this.limpiarTexto();
+          this.listarPrincipal();
+        }
+      })  
+  }
+  actualizarRedes(x){
+    this.accionUpdateRedes=true;
+    this.objRedes.idredes=x.idredes;
+    this.objRedes.titulo=x.titulo;
+    this.objRedes.clases=x.clases;
+    this.objRedes.ruta=x.ruta;
+    this.objRedes.idprincipal=x.idprincipal;
+    this.objRedes.style=x.style;
+  }
+  cancelarRedes(){
+    this.accionUpdateRedes=false;
+    this.listarDetalleRedes(this.objRedes.idprincipal);
   }
   limpiarTexto(){
     this.objRedes.idredes=0;

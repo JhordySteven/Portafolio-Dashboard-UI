@@ -12,6 +12,7 @@ import { NavLateralComponent } from './nav-lateral/nav-lateral.component';
 import { FooterComponent } from './footer/footer.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { FormsModule }   from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { FormsModule }   from '@angular/forms';
     FormsModule,
     CommonModule,
     TooltipModule.forRoot(),
+    ToastrModule.forRoot(),
     NgxFontAwesomeModule
   ],exports:[
     NavbarComponent, PrincipalComponent, AboutComponent, SkillComponent, WorkComponent, JobsComponent,NavLateralComponent,FooterComponent,ContactoComponent
