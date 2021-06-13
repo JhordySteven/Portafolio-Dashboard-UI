@@ -23,6 +23,8 @@ export class PrincipalComponent implements OnInit {
     estado:0,
     opcion:0
   }
+
+  muestra=['Desarrollador Web👨‍💻','Apasionado de la tecnología','Estudiante de Ingenieria'];
   arrayPrincipal:any;
   arrayRedes:any;
 

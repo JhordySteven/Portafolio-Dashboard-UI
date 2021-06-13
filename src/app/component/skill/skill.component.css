@@ -5,10 +5,7 @@
         height: 100vh;
         overflow: hidden;
         padding: 20px 60px;
-        background: #141E30;  /* fallback for old browsers */
-        background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
-        background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        border-bottom: 2px solid #F5B041;
+        background: #17202A;
     }
     .skill>section{
         font-family: 'Teko', sans-serif;
@@ -98,7 +95,7 @@
         margin: auto auto;
     }
     .tecnologias>section>p{
-        font-size: 35px;
+        font-size: 30px;
         font-family: 'Teko', sans-serif;
         color: white;
         text-align: center;

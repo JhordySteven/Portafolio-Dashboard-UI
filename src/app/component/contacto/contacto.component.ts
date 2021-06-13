@@ -26,7 +26,9 @@ export class ContactoComponent implements OnInit {
       this.toast.warning("Ingresar los datos correctos para el envio de correo.");
     }else{
       this.fapi.fapiPost('sendEmail',this.objEmail).subscribe(response=>{
-        console.log(response);
+        if(response=='ok'){
+          this.toast.success('Se envió el correo correctamente.','¡AVISO!');
+        }
         this.limpiarText();
       })
     }

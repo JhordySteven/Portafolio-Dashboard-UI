@@ -48,6 +48,7 @@
               <th class="text-center">
                 <button *ngIf="x.estado==1" class="btn btn-warning btn-xs btnMargin" title="Actualizar" (click)="actualizarPrincipal(x,about)"><i class="fas fa-pen-alt"></i></button>
                 <button *ngIf="x.estado==1" class="btn btn-primary btn-xs btnMargin" title="registrar Redes" (click)="RegistrarRed(x,red)"><i class="fas fa-plus-square"></i></button>
+                <button *ngIf="x.estado==1" class="btn btn-primary btn-xs btnMargin" title="registrar descripciónType" (click)="openModalDescripcion(x,descripcion)"><i class="fas fa-plus-circle"></i></button>
                 <button *ngIf="x.estado==1" class="btn btn-success btn-xs btnMargin" title="Detalles Redes" (click)="DetallesRedes(x,listarRed)"><i class="fas fa-ellipsis-h"></i></button>
                 <button *ngIf="x.estado==1" title="Eliminar" class="btn btn-danger btn-xs btnMargin" (click)="openModalEliminacion(x,eliminar)"><i class="fas fa-trash-alt"></i></button>
                 <button *ngIf="x.estado==2" class="btn btn-info btn-xs btnMargin" title="Activar" (click)="openModalActivar(x,activar)"><i class="fas fa-check-square"></i></button>
@@ -133,6 +134,65 @@
   <div class="modal-footer">
       <button *ngIf="verBotonRegRedes==true" class="btn btn-success btnMargin" (click)="RegistrarRedes()"><i class="fas fa-save"></i> Guardar</button>
       <button *ngIf="verBotonActualizarRedes==true" class="btn btn-success btnMargin" (click)="updatePrincipales()"><i class="fas fa-save"></i> Actualizar</button>
+      <button class="btn btn-light btnMargin" (click)="closeModal()"><i class="fas fa-times"></i> Salir</button>
+  </div>
+</ng-template>
+
+
+<ng-template #descripcion>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{titleModal}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <div class="col-md-12" style="overflow: hidden;">
+        <section class="col-md-6"> 
+          <div class="form-group">
+            <label for="">Nombre:</label>
+            <input type="text" class="form-control" placeholder="Ingresar Nombre" [(ngModel)]="objDescripcion.nombre">
+          </div>
+        </section>
+          <button class="btn btn-primary" style="position: absolute;right: 0px;top: 0px;" (click)="registrarDescripcionType()">Registrar</button>
+      </div>
+      <div class="col-md-12">
+          <table class="table table-striped" >
+            <thead class="tableStyle">
+              <tr>
+                <th class="text-center">#</th>
+                <th class="text-center">Descripción</th>
+                <th class="text-center"></th>
+              </tr>
+            </thead>
+            <tbody *ngIf="accionUpdateDescripcion==false">
+              <tr *ngFor="let x of descripcionType| paginate: { 
+                itemsPerPage: 3,
+                currentPage: p ,
+                id: 'some'}">
+                <th class="text-center">{{x.iddescripcion}}</th>
+                <th class="text-center">{{x.nombre}}</th>
+                <th class="text-center">
+                  <button *ngIf="x.estado==1" class="btn btn-warning btn-xs btnMargin" title="Actualizar" (click)="actualizarDescripcion(x)"><i class="fas fa-pen-alt"></i></button>
+                  <button *ngIf="x.estado==1" title="Eliminar" class="btn btn-danger btn-xs btnMargin" (click)="eliminarDescripcion(x)"><i class="fas fa-trash-alt"></i></button>
+                  <button *ngIf="x.estado==2" class="btn btn-info btn-xs btnMargin" title="Activar" (click)="activarDescripcion(x)"><i class="fas fa-check-square"></i></button>
+                </th>
+              </tr>
+            </tbody>
+            <tfoot *ngIf="accionUpdateDescripcion==true">
+              <tr>
+                <th><input type="text" class="form-control input-sm" [(ngModel)]="objDescripcion.iddescripcion"></th>
+                <th><input type="text" class="form-control input-sm" [(ngModel)]="objDescripcion.nombre"></th>
+                <th><button class="btn btn-xs btn-success"><span class="fa fa-check" (click)="actualizarDescripcionType()"></span></button>
+                    <button class="btn btn-xs btn-default" (click)="cancelarDescripcion()"><span class="fa fa-undo"></span></button>
+                </th>
+              </tr>
+            </tfoot>
+          </table>
+          <pagination-controls id="some" (pageChange)="p = $event"></pagination-controls>
+      </div>
+  </div>
+  <div class="modal-footer">
       <button class="btn btn-light btnMargin" (click)="closeModal()"><i class="fas fa-times"></i> Salir</button>
   </div>
 </ng-template>

@@ -8,10 +8,7 @@
         align-items: center;
         justify-content: center;
         padding: 30px 60px;
-        background: #141E30;  
-        background: -webkit-linear-gradient(to right, #243B55, #141E30);
-        background: linear-gradient(to right, #243B55, #141E30); 
-        border-bottom: 2px solid #F5B041;
+        background: #17202A;
     }
     .contacto>div>section>h1{
         text-align: center;

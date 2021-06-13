@@ -151,7 +151,7 @@ export class GestionMaestroComponent implements OnInit {
     this.mntMaestro.desMaestro=item.desMaestro;
     this.mntMaestro.maestroItem=item.maestroItem;
     this.modalRef = this.modalService.show(template);
-    this.limpiarInput();
+    
   }
   //actualizar Item
   actualizarItem(){

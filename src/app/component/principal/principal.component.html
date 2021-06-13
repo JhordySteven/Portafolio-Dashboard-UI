@@ -4,7 +4,9 @@
         <div class="sectionIzquierda">
             <section *ngFor="let x of arrayPrincipal">
                 <h1>{{x.nombre}}</h1>
-                <p>{{x.descripcion}}👨‍💻</p>
+                <ngx-typed-js  [loop]="true" [strings]="muestra" [typeSpeed] = "100" class="typed" [backDelay] = "2500">
+                    <p class="typing" ></p>
+                </ngx-typed-js>
                 <ul>
                     <a *ngFor="let z of arrayRedes" [ngStyle]="{'background':z.style}"  [ngClass]="z.clases" href="{{z.ruta}}" title="{{z.titulo}}" target="_blank"></a>
                     <button style="background: #B03A2E;" title="Curriculum Vitae" class="fas fa-file-pdf" id="cv"></button>

@@ -30,6 +30,7 @@ export class SkillComponent implements OnInit {
     this.mntSkill.opcion=5;
     this.fapi.fapiGetParameter('listarSkill',this.mntSkill.opcion+'/'+this.mntSkill.estado).subscribe(x=>{
       this.objSkill=x[0];
+      console.log(this.objSkill);
     })
   }
   listarTipoSkill(){
@@ -37,6 +38,7 @@ export class SkillComponent implements OnInit {
     let idMaestro=3;
     this.fapi.fapiGetParameter('listMaestro',opcion+'/'+idMaestro).subscribe(x=>{
       this.objTipoSkill=x[0];
+      console.log(this.objTipoSkill);
     })
   }
 }

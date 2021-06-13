@@ -1,1 +1,116 @@
-<!---->
+<div class="col-md-12 divFiltro" >
+    <div class="col-md-2 divSelFiltro">
+        <div class="form-group">
+            <label for="">Estado:</label>
+            <select class="form-control" [(ngModel)]="objMenuPagina.estado">
+              <option [value]="0">::Seleccione::</option>
+              <option *ngFor="let x of objEstado" [value]="x.maestroItem">{{x.nombreMaestro}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4 divButton">
+        <div class="divCenter">
+            <button  class="btn btn-light btnMargin" (click)="listarMenu()">Consultar</button>
+            <button  class="btn btn-primary btnMargin" (click)="openModal(menu)">Registrar</button>
+        </div>  
+    </div>
+</div>
+
+<div class="col-md-12 cuerpoTable" *ngIf="verTabla">
+        <table class="table table-striped" >
+          <thead class="tableStyle">
+            <tr>
+              <th class="text-center">#</th>
+              <th class="text-center">Nombre</th>
+              <th class="text-center">Tipo Menu</th>
+              <th class="text-center">Ruta</th>
+              <th class="text-center">estado</th>
+              <th class="text-center"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let x of objPagina| paginate: { 
+              itemsPerPage: 5,
+              currentPage: p }">
+              <th class="text-center">{{x.idmenu}}</th>
+              <th class="text-center">{{x.nombre}}</th>
+              <th class="text-center">{{x.nombreMaestro}}</th>
+              <th class="text-center">{{x.ruta}}</th>
+              <th class="text-center">{{x.estado==1?'Activo':'Eliminado'}}</th>
+              <th class="text-center">
+                <button *ngIf="x.estado==1" class="btn btn-warning btn-xs btnMargin" title="Actualizar" (click)="openActualizarModal(x,menu)"><i class="fas fa-pen-alt"></i></button>
+                <button *ngIf="x.estado==1" title="Eliminar" class="btn btn-danger btn-xs btnMargin" (click)="openModalEliminacion(x,eliminar)"><i class="fas fa-trash-alt"></i></button>
+                <button *ngIf="x.estado==2" class="btn btn-info btn-xs btnMargin" title="Activar" (click)="openModalActivar(x,activar)"><i class="fas fa-check-square"></i></button>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+  
+
+<ng-template #menu>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{titleModal}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" ><!--(click)="modalRef.hide()"-->
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <div class="col-md-12">
+          <div class="form-group">
+            <label for="">Pagina</label>
+            <input class="form-control" [(ngModel)]="objMenuPagina.nombre">
+          </div>
+          <div class="form-group">
+            <label for="">Tipo Menu</label>
+            <select class="form-control" [(ngModel)]="objMenuPagina.tipoMenu">
+                <option [value]="">::Seleccione::</option>
+                <option *ngFor="let item of itemMaestro" [value]="item.maestroItem">{{item.nombreMaestro}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="">Ruta</label>
+            <input class="form-control" [(ngModel)]="objMenuPagina.ruta">
+          </div>
+      </div>
+  </div>
+  <div class="modal-footer">
+      <button *ngIf="verBotonRegistrar==true" class="btn btn-success btnMargin" (click)="registrarMenu()"><i class="fas fa-save"></i> Guardar</button>
+      <button *ngIf="verBotonActualizar==true" class="btn btn-success btnMargin" (click)="actualizarPaginaMenu()"><i class="fas fa-save"></i> Actualizar</button>
+      <button class="btn btn-light btnMargin" (click)="closeModal()"><i class="fas fa-times"></i> Salir</button>
+  </div>
+</ng-template>
+
+
+<ng-template #eliminar>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">:: Eliminar ::</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <p>¿Esta seguro de Eliminar el siguiente dato: <b>{{nombreDato}}</b>?</p>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary btnMargin" (click)="eliminarPaginaMenu()"><i class="fas fa-trash-alt"></i> Aceptar</button>
+      <button class="btn btn-light btnMargin" (click)="closeModal()"><i class="fas fa-times"></i> Salir</button>
+  </div>
+</ng-template>
+
+<ng-template #activar>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">:: Activar ::</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <p>¿Esta seguro de activar el siguiente dato: <b>{{nombreDato}}</b>?</p>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary btnMargin" (click)="activarMenu()"><i class="fas fa-trash-alt"></i> Aceptar</button>
+      <button class="btn btn-light btnMargin" (click)="closeModal()"><i class="fas fa-times"></i> Salir</button>
+  </div>
+</ng-template>

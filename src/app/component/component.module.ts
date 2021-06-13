@@ -13,6 +13,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { FormsModule }   from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import {NgxTypedJsModule} from 'ngx-typed-js';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ToastrModule } from 'ngx-toastr';
     CommonModule,
     TooltipModule.forRoot(),
     ToastrModule.forRoot(),
-    NgxFontAwesomeModule
+    NgxFontAwesomeModule,
+    NgxTypedJsModule
   ],exports:[
     NavbarComponent, PrincipalComponent, AboutComponent, SkillComponent, WorkComponent, JobsComponent,NavLateralComponent,FooterComponent,ContactoComponent
   ]

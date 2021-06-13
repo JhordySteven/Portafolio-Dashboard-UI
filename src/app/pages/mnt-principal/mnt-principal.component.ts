@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit,TemplateRef } from '@angular/core';
 import { BsModalService,BsModalRef} from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
@@ -28,6 +29,14 @@ export class MntPrincipalComponent implements OnInit {
   arrayPrincipal:any;
   arrayRedes:any;
   objEstado:any;
+  descripcionType:any;
+  objDescripcion={
+    iddescripcion:0,
+    idprincipal:0,
+    nombre:'',
+    estado:0,
+    opcion:0
+  }
   objPrincipal={
     idprincipal:0,
     nombre:'',
@@ -47,6 +56,7 @@ export class MntPrincipalComponent implements OnInit {
     opcion:0
   }
   accionUpdateRedes=false;
+  accionUpdateDescripcion=false;
   files: File[] = [];
   openModal(template: TemplateRef<any>){
     this.limpiarPrincipal();
@@ -87,14 +97,14 @@ export class MntPrincipalComponent implements OnInit {
   }
   onSelect(event){
     debugger
-    let result = "http://localhost:8888/sources/programador-ilustracion-decorativa-diseno-isometrico_23-2148250395.jpg";
+    /*let result = "http://localhost:8888/sources/programador-ilustracion-decorativa-diseno-isometrico_23-2148250395.jpg";
     let f =  fetch(result).then(r => r.blob()).then(blobFile => new File([blobFile], "programador-ilustracion-decorativa-diseno-isometrico_23-2148250395", { type: "image/png" }));
-    console.log(f);
+    console.log(f);*/
 
-    /*console.log(event.addedFiles);
+    console.log(event.addedFiles);
     if(this.files.length<1){
       this.files.push(...event.addedFiles);
-      }*/
+    }
   }
   onRemove(event) {
     this.files.splice(this.files.indexOf(event), 1);
@@ -128,6 +138,13 @@ export class MntPrincipalComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
     this.nombreDato=x.descripcion;
     this.objPrincipal.idprincipal=x.idprincipal;
+  }
+  openModalDescripcion(x,template: TemplateRef<any>){
+    this.modalRef = this.modalService.show(template);
+    this.titleModal="::Registrar Descripcion::";
+    this.objDescripcion.idprincipal=x.idprincipal;
+    this.listarDescripcionType();
+    this.accionUpdateDescripcion=false;
   }
   eliminarPrincipal(){
     this.objPrincipal.opcion=4;
@@ -242,9 +259,17 @@ export class MntPrincipalComponent implements OnInit {
     this.objRedes.idprincipal=x.idprincipal;
     this.objRedes.style=x.style;
   }
+  actualizarDescripcion(x){
+    this.accionUpdateDescripcion=true;
+    this.objDescripcion.iddescripcion=x.iddescripcion;
+    this.objDescripcion.nombre=x.nombre;
+  }
   cancelarRedes(){
     this.accionUpdateRedes=false;
     this.listarDetalleRedes(this.objRedes.idprincipal);
+  }
+  cancelarDescripcion(){
+    this.accionUpdateDescripcion=false;
   }
   limpiarTexto(){
     this.objRedes.idredes=0;
@@ -303,6 +328,70 @@ export class MntPrincipalComponent implements OnInit {
     this.verPreview=false;
     this.verTabla=true;
     this.verBotonPreview=false;
+  }
+  registrarDescripcionType(){
+    debugger
+    this.objDescripcion.opcion=1;
+    if(this.objDescripcion.nombre=='' || this.objDescripcion.nombre==""){
+      this.toast.warning('Ingresar un nombre','¡AVISO!');
+      return;
+    }
+    else{
+      this.fapi.fapiPost("addDescripcion",this.objDescripcion).subscribe(x=>{
+        console.log(x);
+        if(x=='ok'){
+          this.toast.success('Se registro correctamente.','¡AVISO!');
+          this.limpiarDescripcionType();
+          this.modalService.hide();
+        }
+      })
+    }
+  }
+  actualizarDescripcionType(){
+    this.objDescripcion.opcion=2;
+    this.fapi.fapiPut('updateDescripcion',this.objDescripcion).subscribe(result=>{
+      if(result=='ok'){
+        this.toast.success('Se actualizo correctamente.','¡AVISO!');
+        this.modalService.hide();
+        this.limpiarDescripcionType();
+      }
+    })
+  }
+  eliminarDescripcion(x){
+    this.objDescripcion.iddescripcion=x.iddescripcion;
+    this.objDescripcion.opcion  =4;
+    this.fapi.fapiPut('removeDescripcion',this.objDescripcion).subscribe(result=>{
+      if(result=='ok'){
+        this.toast.success('Se elimino correctamente.','¡AVISO!');
+        this.modalService.hide();
+        this.limpiarDescripcionType();
+      }
+    })
+  }
+  activarDescripcion(x){
+    this.objDescripcion.iddescripcion=x.iddescripcion;
+    this.objDescripcion.opcion=3;
+    this.fapi.fapiPut('removeDescripcion',this.objDescripcion).subscribe(result=>{
+      if(result=='ok'){
+        this.toast.success('Se activo correctamente.','¡AVISO!');
+        this.modalService.hide();
+        this.limpiarDescripcionType();
+      }
+    })
+  }
+  listarDescripcionType(){
+    this.objDescripcion.opcion=5;
+    this.fapi.fapiGetParameter('listarDescripcion',this.objDescripcion.opcion+'/'+this.objDescripcion.estado).subscribe(x=>{
+      this.descripcionType=x[0];
+      console.log(this.descripcionType);
+    })
+  }
+  limpiarDescripcionType(){
+    this.objDescripcion.iddescripcion=0;
+    this.objDescripcion.idprincipal=0;
+    this.objDescripcion.nombre='';
+    this.objDescripcion.estado=0;
+
   }
 
 }
