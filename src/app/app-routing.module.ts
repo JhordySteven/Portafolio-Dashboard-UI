@@ -14,17 +14,19 @@ import { MntJobsComponent } from './pages/mnt-jobs/mnt-jobs.component';
 import { MntPrincipalComponent } from './pages/mnt-principal/mnt-principal.component';
 
 const routes: Routes = [
-  //{ path: '', component: ClienteComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'login', component: LoginComponent },
-  {path:'gestMaestro',component:GestionMaestroComponent},
-  {path:'gestUsuario',component:GestionUsuarioComponent},
-  {path:'gestMenu',component:GestionMenuComponent},
-  {path:'gestSkill',component:MntSkillComponent},
-  {path:'gestWork',component:MntWorkComponent},
-  {path:'gestAbout',component:MntAboutComponent},
-  {path:'gestJobs',component:MntJobsComponent},
-  {path:'gestPrincipal',component:MntPrincipalComponent}
+  {path: '', component: LoginComponent },
+  {path: 'login', component: LoginComponent },
+  {path: 'dashboard', component: DashboardComponent ,
+   children:[     
+    {path:'gestMaestro',component:GestionMaestroComponent},
+    {path:'gestUsuario',component:GestionUsuarioComponent},
+    {path:'gestMenu',component:GestionMenuComponent},
+    {path:'gestSkill',component:MntSkillComponent},
+    {path:'gestWork',component:MntWorkComponent},
+    {path:'gestAbout',component:MntAboutComponent},
+    {path:'gestJobs',component:MntJobsComponent},
+    {path:'gestPrincipal',component:MntPrincipalComponent}
+   ]}
 ];
 
 @NgModule({

@@ -112,9 +112,22 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
+        <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="fas fa-th-large"></i>
         </a>
+        <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-flag"></i> Ver Cuenta
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="#" class="dropdown-item">
+            <i class="fas fa-user-edit"></i> Actualizar Cuenta
+          </a>
+          <div class="dropdown-divider"></div>
+          <a routerLink="/login" class="dropdown-item">
+            <i class="fas fa-door-open"></i> Cerrar Sesion
+          </a>
+        </div>
       </li>
     </ul>
   </nav>
@@ -133,7 +146,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview ">
-            <a href="#" class="nav-link">
+            <a class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Seguridad
@@ -142,43 +155,43 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/gestUsuario" class="nav-link">
+                <a routerLink="/dashboard/gestUsuario" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Gestión de Usuario</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/gestMaestro" class="nav-link">
+                <a routerLink="/dashboard/gestMaestro" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Gestión de Maestro</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/gestSkill" class="nav-link">
+                <a routerLink="/dashboard/gestSkill" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Gestión de Skill</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/gestWork" class="nav-link">
+                <a routerLink="/dashboard/gestWork" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Gestión de Work</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/gestAbout" class="nav-link">
+                <a routerLink="/dashboard/gestAbout" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Gestión de About</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/gestJobs" class="nav-link">
+                <a routerLink="/dashboard/gestJobs" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Gestión de Proyectos</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/gestPrincipal" class="nav-link">
+                <a class="nav-link" routerLink="/dashboard/gestPrincipal">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Gestión de Presentación</p>
                 </a>

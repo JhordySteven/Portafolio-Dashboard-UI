@@ -90,6 +90,7 @@ export class GestionMenuComponent implements OnInit {
   }
   closeModal(){
     this.modalService.hide();
+    this.limpiarCaja();
   }
     //Listado Item Maesto
   listarItemMaestro(){

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ClienteComponent } from './cliente/cliente.component';
 import { LoginComponent } from './login/login.component';
@@ -24,6 +25,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 @NgModule({
   declarations: [ClienteComponent, LoginComponent, DashboardComponent, GestionMenuComponent, GestionMaestroComponent, GestionSeguridadComponent, GestionUsuarioComponent, MntSkillComponent, MntWorkComponent, MntAboutComponent, MntJobsComponent, MntPrincipalComponent],
   imports: [
+    RouterModule,
     CommonModule,
     ComponentModule,
     ModalModule.forRoot(),
@@ -32,7 +34,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     ToastrModule.forRoot(),
     NgxDropzoneModule,
     NgxPaginationModule
-  ],exports:[
+  ],exports:[RouterModule,
     ClienteComponent, LoginComponent, DashboardComponent, GestionMenuComponent, GestionMaestroComponent, GestionSeguridadComponent, GestionUsuarioComponent, MntSkillComponent, MntWorkComponent, MntAboutComponent, MntJobsComponent, MntPrincipalComponent
   ]
 })

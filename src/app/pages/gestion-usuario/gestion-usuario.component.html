@@ -16,7 +16,7 @@
     <div class="col-md-2 divSelFiltro">
         <div class="form-group">
             <label for="">Estado:</label>
-            <select class="form-control">
+            <select class="form-control" [(ngModel)]="mntUsuario.estado">
                 <option>::Seleccione::</option>
             </select>
         </div>
@@ -46,16 +46,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr >
-              <th class="text-center"></th>
-              <th class="text-center"></th>
-              <th class="text-center"></th>
-              <th class="text-center"></th>
-              <th class="text-center"></th>
+            <tr *ngFor="let item of objUsuario">
+              <th class="text-center">{{item.idusuario}}</th>
+              <th class="text-center">{{item.nombre}}</th>
+              <th class="text-center">{{item.apePaterno}} {{item.apeMaterno}}</th>
+              <th class="text-center">{{item.usuario}}</th>
+              <th class="text-center">{{item.estado}}</th>
               <th class="text-center">
-                <button class="btn btn-warning btn-xs btnMargin" title="Actualizar" ><i class="fas fa-pen-alt"></i></button>
-                <button title="Eliminar" class="btn btn-danger btn-xs btnMargin" ><i class="fas fa-trash-alt"></i></button>
-                <button class="btn btn-info btn-xs btnMargin" title="Activar" ><i class="fas fa-check-square"></i></button>
+                <button class="btn btn-warning btn-xs btnMargin" title="Actualizar" (click)="openActualizar(template,item)"><i class="fas fa-pen-alt"></i></button>
+                <button class="btn btn-info btn-xs btnMargin" title="Actualizar password" (click)="openActualizarPassword(password,item)"><i class="fas fa-key"></i></button>
+                <button *ngIf="item.estado===1" title="Eliminar" class="btn btn-danger btn-xs btnMargin" (click)="openModalEl(eliminar,item)"><i class="fas fa-trash-alt"></i></button>
+                <button *ngIf="item.estado===2" class="btn btn-info btn-xs btnMargin" title="Activar" (click)="openModalEl(activar,item)"><i class="fas fa-check-square"></i></button>
               </th>
             </tr>
           </tbody>
@@ -66,8 +67,8 @@
 
 <ng-template #template>
     <div class="modal-header">
-      <h4 class="modal-title pull-left">:: Registrar Usuario ::</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <h4 class="modal-title pull-left">{{nombreAccion}}</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeRegisterUser()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -75,28 +76,92 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="">Nombre:</label>
-                <input type="text" class="form-control" placeholder="Ingresar Nombre">
+                <input type="text" class="form-control" [(ngModel)]="mntUsuario.nombre" placeholder="Ingresar Nombre">
             </div>
             <div class="form-group">
                 <label for="">Apellido Paterno:</label>
-                <input type="text" class="form-control" placeholder="Ingresar Apellido Paterno">
+                <input type="text" class="form-control" [(ngModel)]="mntUsuario.apePaterno" placeholder="Ingresar Apellido Paterno">
             </div>
             <div class="form-group">
                 <label for="">Apellido Materno:</label>
-                <input type="text" class="form-control" placeholder="Ingresar Apellido Materno">
+                <input type="text" class="form-control" [(ngModel)]="mntUsuario.apeMaterno" placeholder="Ingresar Apellido Materno">
             </div>
             <div class="form-group">
                 <label for="">Usuario:</label>
-                <input type="text" class="form-control" placeholder="Ingresar Usuario">
+                <input type="text" class="form-control" [(ngModel)]="mntUsuario.usuario" placeholder="Ingresar Usuario">
             </div>
-            <div class="form-group">
+            <div *ngIf="botonAccion" class="form-group">
                 <label for="">Password:</label>
-                <input type="password" class="form-control" placeholder="Ingresar Password">
+                <input type="password" class="form-control" [(ngModel)]="mntUsuario.password" placeholder="Ingresar Password">
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-success btnMargin"><i class="fas fa-save"></i> Guardar</button>
+        <button *ngIf="botonAccion" class="btn btn-success btnMargin" (click)="registrarUsuario()"><i class="fas fa-save"></i> Guardar</button>
+        <button *ngIf="!botonAccion" class="btn btn-success btnMargin" (click)="updateUsuario()"><i class="fas fa-save"></i> Actualizar</button>      
+        <button class="btn btn-light btnMargin" (click)="closeRegisterUser()"><i class="fas fa-times"></i> Salir</button>
+    </div>
+  </ng-template>
+
+
+
+  <ng-template #password>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">:: Actualizar Contraseña ::</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="">Contraseña Anterior:</label>
+                <input type="password" class="form-control" [(ngModel)]="mntUsuario.contrasena" placeholder="Ingresar Contraseña anterior">
+            </div>
+            <div class="form-group">
+                <label for="">Nueva Contraseña:</label>
+                <input type="password" class="form-control" [(ngModel)]="mntUsuario.passwordNew" placeholder="Ingresar Nueva Contraseña">
+            </div>
+            <div class="form-group">
+                <label for="">Confirmar contraseña:</label>
+                <input type="password" class="form-control" [(ngModel)]="mntUsuario.passwordConfirmar" placeholder="Ingresar Confirmar Contraseña">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success btnMargin" (click)="updateContra()"><i class="fas fa-save"></i> Guardar</button>
+        <button class="btn btn-light btnMargin" (click)="closeRegisterUser()"><i class="fas fa-times"></i> Salir</button>
+    </div>
+  </ng-template>
+
+  <ng-template #eliminar>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">:: Eliminar ::</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="closeRegisterUser()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <p>¿Esta seguro de Eliminar el siguiente dato: <b>{{nombreDato}}</b>?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary btnMargin" (click)="eliminarUsuario()"><i class="fas fa-trash-alt"></i> Aceptar</button>
+        <button class="btn btn-light btnMargin" (click)="closeRegisterUser()"><i class="fas fa-times"></i> Salir</button>
+    </div>
+  </ng-template>
+  
+  <ng-template #activar>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">:: Activar ::</h4>
+      <button type="button" class="close pull-right" aria-label="closeRegisterUser" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <p>¿Esta seguro de activar el siguiente dato: <b>{{nombreDato}}</b>?</p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary btnMargin" (click)="activarUsuario()"><i class="fas fa-trash-alt"></i> Aceptar</button>
         <button class="btn btn-light btnMargin" (click)="closeRegisterUser()"><i class="fas fa-times"></i> Salir</button>
     </div>
   </ng-template>

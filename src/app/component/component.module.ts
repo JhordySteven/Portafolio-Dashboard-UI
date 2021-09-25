@@ -1,4 +1,6 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -18,14 +20,14 @@ import {NgxTypedJsModule} from 'ngx-typed-js';
 
 @NgModule({
   declarations: [NavbarComponent, PrincipalComponent, AboutComponent, SkillComponent, WorkComponent, JobsComponent, NavLateralComponent, FooterComponent, ContactoComponent],
-  imports: [
+  imports: [RouterModule,
     FormsModule,
     CommonModule,
     TooltipModule.forRoot(),
     ToastrModule.forRoot(),
     NgxFontAwesomeModule,
     NgxTypedJsModule
-  ],exports:[
+  ],exports:[RouterModule,
     NavbarComponent, PrincipalComponent, AboutComponent, SkillComponent, WorkComponent, JobsComponent,NavLateralComponent,FooterComponent,ContactoComponent
   ]
 })

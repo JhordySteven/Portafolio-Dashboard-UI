@@ -52,7 +52,7 @@
 <ng-template #menu>
   <div class="modal-header">
     <h4 class="modal-title pull-left">{{titleModal}}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" ><!--(click)="modalRef.hide()"-->
+    <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -65,7 +65,7 @@
           <div class="form-group">
             <label for="">Tipo Menu</label>
             <select class="form-control" [(ngModel)]="objMenuPagina.tipoMenu">
-                <option [value]="">::Seleccione::</option>
+                <option [value]="0">::Seleccione::</option>
                 <option *ngFor="let item of itemMaestro" [value]="item.maestroItem">{{item.nombreMaestro}}</option>
             </select>
           </div>
